@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shah Co. — Stock Inventory &amp; Sales</title>
+<style>
+  /* ═══════════════════════════════════════════════════════════
+     Shah Co. — Stock Inventory &amp; Sales Portal
+     Dark navy + gold brand. Professional wholesale look.
+     ═══════════════════════════════════════════════════════════ */
+  :root {
+    --navy:    #1B2A4A;
+    --navy-md: #2C3E6B;
+    --navy-dk: #0F1A30;
+    --gold:    #C9A84C;
+    --gold-lt: #FFF3CD;
+    --white:   #FFFFFF;
+    --off-wht: #F8F9FC;
+    --slate:   #34495E;
+    --green:   #6AA84F;
+    --green-bg:#C6EFCE;
+    --yellow:  #FFC000;
+    --yellow-bg:#FFF2CC;
+    --red:     #F44336;
+    --red-bg:  #FFC7CE;
+    --grey-bd: #D0D7E2;
+    --grey-bg: #F2F4F7;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--off-wht);
+    color: var(--slate);
+    min-height: 100vh;
+  }
+
+  /* ── NAVY BRAND STRIP ─────────────────────────────────── */
+  .brand-strip {
+    background: var(--navy);
+    padding: 14px 0;
+    border-bottom: 3px solid var(--gold);
+  }
+  .brand-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .brand-icon {
+    width: 42px; height: 42px;
+    background: var(--gold);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 900; color: var(--navy);
+  }
+  .brand-text { color: var(--white); }
+  .brand-text h1 {
+    font-size: 18px; font-weight: 700; letter-spacing: 0.5px;
+    margin: 0;
+  }
+  .brand-text .sub {
+    font-size: 11px; color: var(--gold);
+    font-style: italic; margin-top: 2px;
+  }
+  .brand-meta {
+    color: var(--gold);
+    font-size: 11px;
+    text-align: right;
+  }
+  .brand-meta .loc { color: var(--white); font-weight:600; }
+
+  /* ── KPI BAR ──────────────────────────────────────────── */
+  .kpi-bar {
+    background: var(--navy-dk);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border-bottom: 1px solid var(--navy-md);
+  }
+  .kpi-item {
+    flex: 1 1 120px;
+    min-width: 100px;
+    padding: 10px 16px;
+    border-right: 1px solid var(--navy-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .kpi-item:last-child { border-right: none; }
+  .kpi-val {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .kpi-lbl {
+    font-size: 10px;
+    color: var(--white);
+    opacity: 0.7;
+    margin-top: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .kpi-green .kpi-val { color: var(--green); }
+  .kpi-yellow .kpi-val { color: var(--yellow); }
+  .kpi-red .kpi-val { color: var(--red); }
+
+  /* ── MAIN LAYOUT ──────────────────────────────────────── */
+  .main-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* ── SECTION HEADERS ──────────────────────────────────── */
+  .sec-head {
+    background: var(--navy);
+    color: var(--white);
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .sec-head .icon {
+    font-size: 16px;
+  }
+  .sec-head .badge {
+    margin-left: auto;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-weight: 700;
+  }
+
+  /* ── FILTER BAR ───────────────────────────────────────── */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+    align-items: center;
+  }
+  .filter-bar label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--slate);
+    margin-right: 2px;
+  }
+  .filter-bar select,
+  .filter-bar input {
+    padding: 7px 10px;
+    border: 1px solid var(--grey-bd);
+    border-radius: 5px;
+    font-size: 13px;
+    background: var(--white);
+    color: var(--slate);
+    outline: none;
+  }
+  .filter-bar select:focus,
+  .filter-bar input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px var(--gold-lt);
+  }
+  .search-box {
+    flex: 1 1 200px;
+    min-width: 140px;
+  }
+
+  /* ── INVENTORY GRID ───────────────────────────────────── */
+  .inv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+  .inv-card {
+    background: var(--white);
+    border: 1px solid var(--grey-bd);
+    border-radius: 8px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .inv-card:hover {
+    box-shadow: 0 4px 14px rgba(0,0,0,0.10);
+    transform: translateY(-2px);
+  }
+  .inv-card .card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .inv-card .sku {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--gold);
+    background: var(--gold-lt);
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+  }
+  .inv-card .status-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .st-ok   { background: var(--green-bg);  color: #375623; }
+  .st-low  { background: var(--yellow-bg); color: #7D6608; }
+  .st-out  { background: var(--red-bg);    color: #9C0006; }
+  .st-check{ background: #FFEBE6;          color: #B43A1A; }
+
+  .inv-card .item-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+  .inv-card .item-urdu {
+    font-size: 12px;
+    color: var(--slate);
+    font-style: italic;
+    direction: rtl;
+    text-align: right;
+    margin-top: -2px;
+  }
+  .inv-card .item-supplier {
+    font-size: 11px;
+    color: var(--slate);
+    opacity: 0.75;
+  }
+  .inv-card .card-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .stat-box {
+    background: var(--grey-bg);
+    border-radius: 5px;
+    padding: 6px 8px;
+    text-align: center;
+  }
+  .stat-box .num {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+  .stat-box .lbl {
+    font-size: 9px;
+    color: var(--slate);
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .stat-box.highlight .num { color: var(--gold); }
+
+  .inv-card .price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--grey-bd);
+  }
+  .price-tag {
+    font-size: 11px;
+    color: var(--slate);
+  }
+  .price-tag strong {
+    color: var(--navy);
+    font-size: 14px;
+  }
+  .sell-btn {
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    padding: 6px 14px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .sell-btn:hover { background: var(--navy-md); }
+  .sell-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  /* ── SALES FORM ───────────────────────────────────────── */
+  .sales-panel {
+    background: var(--white);
+    border: 1px solid var(--grey-bd);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 12px;
+  }
+  .form-row.single { grid-template-columns: 1fr; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--slate);
+    margin-bottom: 4px;
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    padding: 9px 11px;
+    border: 1px solid var(--grey-bd);
+    border-radius: 6px;
+    font-size: 13px;
+    background: var(--white);
+    color: var(--slate);
+    outline: none;
+    font-family: inherit;
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px var(--gold-lt);
+  }
+  .field textarea { resize: vertical; min-height: 60px; }
+
+  .submit-btn {
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    padding: 11px 30px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    width: 100%;
+    margin-top: 4px;
+  }
+  .submit-btn:hover { background: #D4B84C; }
+  .submit-btn:active { transform: scale(0.985); }
+
+  /* ── ORDERS TABLE ─────────────────────────────────────── */
+  .orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border: 1px solid var(--grey-bd);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .orders-table th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 9px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .orders-table td {
+    padding: 9px 12px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--grey-bg);
+    color: var(--slate);
+  }
+  .orders-table tr:last-child td { border-bottom: none; }
+  .orders-table tr:hover td { background: var(--grey-bg); }
+  .ord-status {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 7px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+  .ord-pending  { background: var(--yellow-bg); color: #7D6608; }
+  .ord-confirmed{ background: var(--green-bg);  color: #375623; }
+
+  .empty-msg {
+    text-align: center;
+    padding: 30px;
+    color: var(--slate);
+    opacity: 0.6;
+    font-style: italic;
+  }
+
+  /* ── FOOTER ───────────────────────────────────────────── */
+  .foot {
+    text-align: center;
+    padding: 20px;
+    color: var(--slate);
+    opacity: 0.5;
+    font-size: 11px;
+    border-top: 1px solid var(--grey-bd);
+    margin-top: 20px;
+  }
+
+  /* ── RESPONSIVE ───────────────────────────────────────── */
+  @media (max-width: 600px) {
+    .form-row { grid-template-columns: 1fr; }
+    .inv-grid { grid-template-columns: 1fr; }
+    .kpi-item { flex: 1 1 80px; min-width: 70px; padding: 8px 10px; }
+    .kpi-val { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ BRAND STRIP ═══════════════════════ -->
+<div class="brand-strip">
+  <div class="brand-inner">
+    <div class="brand-logo">
+      <div class="brand-icon">SC</div>
+      <div class="brand-text">
+        <h1>Shah Co. — Stock Inventory &amp; Sales</h1>
+        <div class="sub">Wholesale Business · Peshawar · Store Stock Record</div>
+      </div>
+    </div>
+    <div class="brand-meta">
+      <div class="loc">Peshawar, Khyber Pakhtunkhwa</div>
+      <div>Updated: <span id="today-date"></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ KPI BAR ═══════════════════════════ -->
+<div class="kpi-bar" id="kpi-bar">
+  <div class="kpi-item">
+    <div class="kpi-val" id="kpi-total">—</div>
+    <div class="kpi-lbl">Total Items</div>
+  </div>
+  <div class="kpi-item kpi-green">
+    <div class="kpi-val" id="kpi-instock">—</div>
+    <div class="kpi-lbl">In Stock</div>
+  </div>
+  <div class="kpi-item kpi-yellow">
+    <div class="kpi-val" id="kpi-low">—</div>
+    <div class="kpi-lbl">Low Stock</div>
+  </div>
+  <div class="kpi-item kpi-red">
+    <div class="kpi-val" id="kpi-out">—</div>
+    <div class="kpi-lbl">Out of Stock</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val" id="kpi-value">Rs 0</div>
+    <div class="kpi-lbl">Stock Value</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-val" id="kpi-orders">0</div>
+    <div class="kpi-lbl">Today's Orders</div>
+  </div>
+</div>
+
+<div class="main-wrap">
+
+  <!-- ═══════════════════ INVENTORY ═══════════════════════ -->
+  <div class="sec-head">
+    <span class="icon">📦</span> Inventory Items <span class="badge" id="item-count-badge">24 items</span>
+  </div>
+
+  <div class="filter-bar">
+    <label for="filter-status">Status:</label>
+    <select id="filter-status">
+      <option value="all">All Items</option>
+      <option value="OK">OK (In Stock)</option>
+      <option value="Low">Low Stock</option>
+      <option value="Out of stock">Out of Stock</option>
+    </select>
+    <label for="filter-supplier">Supplier:</label>
+    <select id="filter-supplier">
+      <option value="all">All Suppliers</option>
+    </select>
+    <div class="search-box">
+      <input type="text" id="search-box" placeholder="🔍 Search item name or SKU…" />
+    </div>
+    <button id="btn-reset-filter" style="padding:7px 12px;background:var(--grey-bg);border:1px solid var(--grey-bd);border-radius:5px;cursor:pointer;font-size:12px;">Reset</button>
+  </div>
+
+  <div class="inv-grid" id="inv-grid"></div>
+
+  <!-- ═══════════════════ SALES FORM ══════════════════════ -->
+  <div class="sec-head" style="margin-top:10px;">
+    <span class="icon">🛒</span> Place Order <span class="badge">New Sale</span>
+  </div>
+
+  <div class="sales-panel">
+    <form id="order-form">
+      <div class="form-row">
+        <div class="field">
+          <label for="ord-sku">Item Code (SKU)</label>
+          <input type="text" id="ord-sku" list="sku-list" placeholder="e.g. STK001" required />
+          <datalist id="sku-list"></datalist>
+        </div>
+        <div class="field">
+          <label for="ord-item">Item Name</label>
+          <input type="text" id="ord-item" placeholder="Auto-filled from SKU" readonly style="background:#f0f4f8;color:var(--slate);" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="ord-qty">Quantity (Pcs)</label>
+          <input type="number" id="ord-qty" min="1" placeholder="Enter quantity" required />
+        </div>
+        <div class="field">
+          <label for="ord-customer">Customer Name</label>
+          <input type="text" id="ord-customer" placeholder="Customer name" required />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="ord-phone">Phone</label>
+          <input type="tel" id="ord-phone" placeholder="0300-XXXXXXX" />
+        </div>
+        <div class="field">
+          <label for="ord-notes">Notes / Reference</label>
+          <input type="text" id="ord-notes" placeholder="Optional note" />
+        </div>
+      </div>
+      <div class="form-row single">
+        <div class="field">
+          <label for="ord-address">Delivery Address</label>
+          <textarea id="ord-address" placeholder="Customer delivery address…"></textarea>
+        </div>
+      </div>
+      <div class="form-row single" style="margin-top:14px; padding:10px 14px; background:var(--grey-bg); border-radius:6px; font-size:13px; color:var(--slate);">
+        <strong>Order Summary:</strong>
+        <span id="ord-summary" style="font-weight:700; color:var(--navy); margin-left:8px;">—</span>
+      </div>
+      <button type="submit" class="submit-btn" id="btn-submit-order">🛒 Confirm Order — Add to Sales Record</button>
+    </form>
+  </div>
+
+  <!-- ═══════════════════ TODAY'S ORDERS ══════════════════ -->
+  <div class="sec-head" style="margin-top:10px;">
+    <span class="icon">📋</span> Today's Orders <span class="badge" id="today-ord-count">0 orders</span>
+  </div>
+
+  <div id="orders-container">
+    <table class="orders-table" id="orders-table" style="display:none;">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>SKU</th>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Customer</th>
+          <th>Phone</th>
+          <th>Total (Rs)</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="orders-tbody"></tbody>
+    </table>
+    <div class="empty-msg" id="orders-empty">No orders placed yet today. Use the form above to record a sale.</div>
+  </div>
+
+</div>
+
+<div class="foot">
+  Shah Co. Inventory &amp; Sales Portal · Built with ❤️ · Peshawar · Data synced from Stock_Inventory.xlsx
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   INVENTORY DATA — 24 items · STK001–STK024
+   Sourced from Stock_Inventory.xlsx · Build: v2 Premium
+   ═══════════════════════════════════════════════════════════ */
+const ITEMS = [
+  { sku:"STK001", name:"Upper Body",        urdu:"Upper باڈی",              sup:"ABC Traders",    minStock:30, cost:35,  sell:55  },
+  { sku:"STK002", name:"Cat",               urdu:"کیٹ",                       sup:"XYZ Wholesale",  minStock:30, cost:20,  sell:35  },
+  { sku:"STK003", name:"Bolt Jora",         urdu:"بلوٹ جوڑا",                 sup:"ABC Traders",    minStock:40, cost:12,  sell:20  },
+  { sku:"STK004", name:"Barrel",            urdu:"بیرل",                      sup:"Local Market",   minStock:20, cost:45,  sell:70  },
+  { sku:"STK005", name:"Zaha",              urdu:"زخہ",                       sup:"XYZ Wholesale",  minStock:20, cost:18,  sell:30  },
+  { sku:"STK006", name:"Poungee",           urdu:"پونگی",                     sup:"ABC Traders",    minStock:30, cost:22,  sell:38  },
+  { sku:"STK007", name:"Gas Pipe",          urdu:"گیس پائپ",                  sup:"Gas Co. Ltd",    minStock:30, cost:60,  sell:95  },
+  { sku:"STK008", name:"Silver Ring",       urdu:"سلور رینگ",                 sup:"Jewellery Sup.",  minStock:25, cost:150, sell:220 },
+  { sku:"STK009", name:"Jali Cutter",       urdu:"جالی کٹر",                  sup:"ABC Traders",    minStock:15, cost:80,  sell:120 },
+  { sku:"STK010", name:"Fitting Nut",       urdu:"فٹنگ ناٹ",                  sup:"ABC Traders",    minStock:20, cost:8,   sell:15  },
+  { sku:"STK011", name:"Chalan Saman Moti Wala", urdu:"چلن سامان موٹی والا",  sup:"XYZ Wholesale",  minStock:20, cost:25,  sell:40  },
+  { sku:"STK012", name:"Chota Packet",      urdu:"چھوٹا پاکٹ",                sup:"ABC Traders",    minStock:15, cost:10,  sell:18  },
+  { sku:"STK013", name:"Kashkonki",         urdu:"کشکونکے",                  sup:"XYZ Wholesale",  minStock:10, cost:55,  sell:85  },
+  { sku:"STK014", name:"Push Button",       urdu:"پوش بٹن",                   sup:"ABC Traders",    minStock:25, cost:15,  sell:25  },
+  { sku:"STK015", name:"Karki",             urdu:"کھڑکی",                      sup:"Local Market",   minStock:20, cost:110, sell:160 },
+  { sku:"STK016", name:"Upper Handle",      urdu:"Upper ہینڈل",               sup:"ABC Traders",    minStock:20, cost:40,  sell:60  },
+  { sku:"STK017", name:"Motay Agay Wala",   urdu:"موٹے آگے والا",             sup:"ABC Traders",    minStock:20, cost:30,  sell:45  },
+  { sku:"STK018", name:"Pipe Taiwan",       urdu:"پائپ تھائی وان",             sup:"Pipe Co.",       minStock:30, cost:70,  sell:110 },
+  { sku:"STK019", name:"Cover",             urdu:"کاور",                      sup:"ABC Traders",    minStock:20, cost:20,  sell:32  },
+  { sku:"STK020", name:"Weight",            urdu:"وزن",                       sup:"ABC Traders",    minStock:20, cost:28,  sell:42  },
+  { sku:"STK021", name:"Weight Spring",     urdu:"وزن سپرنگ",                 sup:"ABC Traders",    minStock:20, cost:35,  sell:50  },
+  { sku:"STK022", name:"Pipe Kari",         urdu:"پائپ کھڑے",                 sup:"Pipe Co.",       minStock:15, cost:50,  sell:75  },
+  { sku:"STK023", name:"Magpol Patri",      urdu:"میک پول پٹری",              sup:"XYZ Wholesale",  minStock:10, cost:45,  sell:65  },
+  { sku:"STK024", name:"Press Ring",        urdu:"پریس رینگ",                 sup:"ABC Traders",    minStock:15, cost:90,  sell:130 },
+];
+
+// Per-item stock (opening 200 + stock in – stock out — matches Excel computed values)
+const STOCK = {
+  STK001: 130, STK002: 100, STK003: 80,  STK004: 200, STK005: 200,
+  STK006: 200, STK007: 60,  STK008: 120, STK009: 200, STK010: 200,
+  STK011: 200, STK012: 200, STK013: 10,  STK014: 200, STK015: 200,
+  STK016: 200, STK017: 200, STK018: 200, STK019: 200, STK020: 200,
+  STK021: 200, STK022: 200, STK023: 10,  STK024: 200
+};
+
+// ── HELPERS ───────────────────────────────────────────────
+function getItem(sku) {
+  return ITEMS.find(i => i.sku === sku);
+}
+
+function getStatus(item) {
+  const s = STOCK[item.sku];
+  if (s === undefined || s < 0) return 'Check entries';
+  if (s === 0) return 'Out of stock';
+  if (s <= item.minStock) return 'Low';
+  return 'OK';
+}
+
+function statusClass(status) {
+  if (status === 'OK') return 'st-ok';
+  if (status === 'Low') return 'st-low';
+  if (status === 'Out of stock') return 'st-out';
+  return 'st-check';
+}
+
+function fmtRs(n) {
+  return 'Rs ' + Number(n).toLocaleString('en-PK');
+}
+
+// ── KPI CALC ──────────────────────────────────────────────
+function updateKPIs() {
+  const total = ITEMS.length;
+  const instock = ITEMS.filter(i => getStatus(i) === 'OK').length;
+  const low = ITEMS.filter(i => getStatus(i) === 'Low').length;
+  const out = ITEMS.filter(i => getStatus(i) === 'Out of stock').length;
+  const totalVal = ITEMS.reduce((sum, i) => sum + (STOCK[i.sku]||0) * i.sell, 0);
+
+  document.getElementById('kpi-total').textContent   = total;
+  document.getElementById('kpi-instock').textContent = instock;
+  document.getElementById('kpi-low').textContent     = low;
+  document.getElementById('kpi-out').textContent     = out;
+  document.getElementById('kpi-value').textContent   = fmtRs(totalVal);
+
+  const todayOrders = getTodayOrders();
+  document.getElementById('kpi-orders').textContent  = todayOrders.length;
+  document.getElementById('today-ord-count').textContent = todayOrders.length + ' orders';
+}
+
+// ── RENDER INVENTORY ──────────────────────────────────────
+function renderInventory(filter) {
+  const grid = document.getElementById('inv-grid');
+  const items = ITEMS.filter(i => {
+    const st = getStatus(i);
+    if (filter.status !== 'all' && st !== filter.status) return false;
+    if (filter.supplier !== 'all' && i.sup !== filter.supplier) return false;
+    const q = (filter.query || '').toLowerCase();
+    if (q && !i.sku.toLowerCase().includes(q) && !i.name.toLowerCase().includes(q) && !i.urdu.includes(q)) return false;
+    return true;
+  });
+
+  document.getElementById('item-count-badge').textContent = items.length + ' item' + (items.length !== 1 ? 's' : '');
+
+  if (items.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--slate);opacity:0.6;">No items match the current filter.</div>';
+    return;
+  }
+
+  grid.innerHTML = items.map(i => {
+    const st = getStatus(i);
+    const stCls = statusClass(st);
+    const stock = STOCK[i.sku] ?? 0;
+    const reorder = Math.max(0, i.minStock * 2 - stock);
+    return `
+      <div class="inv-card" data-sku="${i.sku}">
+        <div class="card-top">
+          <span class="sku">${i.sku}</span>
+          <span class="status-badge ${stCls}">${st}</span>
+        </div>
+        <div class="item-name">${i.name}</div>
+        <div class="item-urdu">${i.urdu}</div>
+        <div class="item-supplier">Supplier: ${i.sup}</div>
+        <div class="card-stats">
+          <div class="stat-box ${stock <= i.minStock && stock > 0 ? 'highlight' : ''}">
+            <div class="num">${stock}</div>
+            <div class="lbl">Current Stock</div>
+          </div>
+          <div class="stat-box">
+            <div class="num">${i.minStock}</div>
+            <div class="lbl">Min. Stock</div>
+          </div>
+          <div class="stat-box">
+            <div class="num">${i.cost}</div>
+            <div class="lbl">Cost (Rs)</div>
+          </div>
+          <div class="stat-box">
+            <div class="num">${i.sell}</div>
+            <div class="lbl">Sell (Rs)</div>
+          </div>
+        </div>
+        <div class="price-row">
+          <div class="price-tag">Sell: <strong>${fmtRs(i.sell)}</strong> / pcs</div>
+          <button class="sell-btn" data-sku="${i.sku}" ${stock === 0 ? 'disabled' : ''}>
+            ${stock === 0 ? 'Out of Stock' : 'Sell Item →'}
+          </button>
+        </div>
+      </div>`;
+  }).join('');
+
+  // Attach sell button handlers
+  grid.querySelectorAll('.sell-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sku = btn.dataset.sku;
+      document.getElementById('ord-sku').value = sku;
+      document.getElementById('ord-sku').dispatchEvent(new Event('input'));
+      document.getElementById('ord-sku').scrollIntoView({ behavior:'smooth', block:'center' });
+    });
+  });
+}
+
+// ── FILTER LOGIC ──────────────────────────────────────────
+const filterState = { status:'all', supplier:'all', query:'' };
+
+function updateFilters() {
+  filterState.status   = document.getElementById('filter-status').value;
+  filterState.supplier = document.getElementById('filter-supplier').value;
+  filterState.query    = document.getElementById('search-box').value.trim();
+  renderInventory(filterState);
+}
+
+document.getElementById('filter-status').addEventListener('change', updateFilters);
+document.getElementById('filter-supplier').addEventListener('change', updateFilters);
+document.getElementById('search-box').addEventListener('input', updateFilters);
+document.getElementById('btn-reset-filter').addEventListener('click', () => {
+  document.getElementById('filter-status').value = 'all';
+  document.getElementById('filter-supplier').value = 'all';
+  document.getElementById('search-box').value = '';
+  updateFilters();
+});
+
+// ── SUPPLIER DROPDOWN ─────────────────────────────────────
+const suppliers = [...new Set(ITEMS.map(i => i.sup))].sort();
+const supSel = document.getElementById('filter-supplier');
+suppliers.forEach(s => {
+  const opt = document.createElement('option');
+  opt.value = s; opt.textContent = s;
+  supSel.appendChild(opt);
+});
+
+// ── SKU DATALIST ──────────────────────────────────────────
+const skuList = document.getElementById('sku-list');
+ITEMS.forEach(i => {
+  const opt = document.createElement('option');
+  opt.value = i.sku;
+  skuList.appendChild(opt);
+});
+
+// ── ORDER FORM ────────────────────────────────────────────
+document.getElementById('ord-sku').addEventListener('input', function() {
+  const sku = this.value.toUpperCase().trim();
+  const item = getItem(sku);
+  const itemField = document.getElementById('ord-item');
+  const summary  = document.getElementById('ord-summary');
+
+  if (item) {
+    itemField.value = item.name + ' (' + item.urdu + ')';
+    itemField.style.background = '#fff';
+    itemField.style.color = 'var(--slate)';
+  } else {
+    itemField.value = '';
+    itemField.style.background = '#f0f4f8';
+    itemField.style.color = 'var(--slate)';
+  }
+
+  const qty = Number(document.getElementById('ord-qty').value) || 0;
+  if (item && qty > 0) {
+    const total = item.sell * qty;
+    summary.textContent = qty + ' × ' + fmtRs(item.sell) + ' = ' + fmtRs(total) + '  |  SKU: ' + item.sku + ' · ' + item.name;
+    document.getElementById('btn-submit-order').disabled = false;
+  } else {
+    summary.textContent = '—';
+    document.getElementById('btn-submit-order').disabled = true;
+  }
+});
+
+document.getElementById('ord-qty').addEventListener('input', function() {
+  document.getElementById('ord-sku').dispatchEvent(new Event('input'));
+});
+
+document.getElementById('order-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const sku     = document.getElementById('ord-sku').value.toUpperCase().trim();
+  const qty     = Number(document.getElementById('ord-qty').value);
+  const customer= document.getElementById('ord-customer').value.trim();
+  const phone   = document.getElementById('ord-phone').value.trim();
+  const notes   = document.getElementById('ord-notes').value.trim();
+  const address = document.getElementById('ord-address').value.trim();
+
+  const item = getItem(sku);
+  if (!item) { alert('Please enter a valid SKU (e.g. STK001).'); return; }
+  if (qty <= 0) { alert('Quantity must be greater than 0.'); return; }
+  if (!customer) { alert('Customer name is required.'); return; }
+  if (!STOCK[sku] || STOCK[sku] < qty) {
+    alert('Not enough stock! Available: ' + (STOCK[sku] || 0) + ' pcs. You requested ' + qty + ' pcs.');
+    return;
+  }
+
+  // Deduct stock
+  STOCK[sku] -= qty;
+
+  // Save order
+  const order = {
+    id: Date.now(),
+    sku, item: item.name, qty, customer, phone, notes, address,
+    total: item.sell * qty,
+    status: 'Pending',
+    timestamp: new Date().toISOString()
+  };
+  saveOrder(order);
+
+  // Reset form
+  document.getElementById('ord-sku').value = '';
+  document.getElementById('ord-item').value = '';
+  document.getElementById('ord-item').style.background = '#f0f4f8';
+  document.getElementById('ord-qty').value = '';
+  document.getElementById('ord-customer').value = '';
+  document.getElementById('ord-phone').value = '';
+  document.getElementById('ord-notes').value = '';
+  document.getElementById('ord-address').value = '';
+  document.getElementById('ord-summary').textContent = '—';
+  document.getElementById('btn-submit-order').disabled = true;
+
+  updateKPIs();
+  renderInventory(filterState);
+  renderOrders();
+  alert('✅ Order recorded!\n\n' + qty + ' × ' + item.name + ' → ' + customer + '\nTotal: ' + fmtRs(order.total) + '\nStock updated.');
+});
+
+// ── ORDERS STORAGE (localStorage — persists in browser) ──
+function getOrders() {
+  try { return JSON.parse(localStorage.getItem('shahco_orders') || '[]'); } catch { return []; }
+}
+function saveOrder(order) {
+  const orders = getOrders();
+  orders.unshift(order);
+  localStorage.setItem('shahco_orders', JSON.stringify(orders));
+}
+function getTodayOrders() {
+  const today = new Date().toDateString();
+  return getOrders().filter(o => new Date(o.timestamp).toDateString() === today);
+}
+
+// ── RENDER ORDERS ─────────────────────────────────────────
+function renderOrders() {
+  const todayOrders = getTodayOrders();
+  const tbody   = document.getElementById('orders-tbody');
+  const table   = document.getElementById('orders-table');
+  const empty   = document.getElementById('orders-empty');
+
+  if (todayOrders.length === 0) {
+    table.style.display = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+  table.style.display = '';
+  empty.style.display = 'none';
+
+  tbody.innerHTML = todayOrders.map((o, i) => `
+    <tr>
+      <td>${i+1}</td>
+      <td><span style="font-weight:700;color:var(--gold);">${o.sku}</span></td>
+      <td>${o.item}</td>
+      <td>${o.qty} pcs</td>
+      <td>${o.customer}</td>
+      <td>${o.phone || '—'}</td>
+      <td style="font-weight:700;color:var(--navy);">${fmtRs(o.total)}</td>
+      <td><span class="ord-status ord-${o.status === 'Confirmed' ? 'confirmed' : 'pending'}">${o.status}</span></td>
+    </tr>`).join('');
+}
+
+// ── TODAY'S DATE ──────────────────────────────────────────
+document.getElementById('today-date').textContent = new Date().toLocaleDateString('en-PK', {
+  weekday:'long', year:'numeric', month:'long', day:'numeric'
+});
+
+// ── INIT ──────────────────────────────────────────────────
+updateKPIs();
+renderInventory(filterState);
+renderOrders();
+</script>
+</body>
+</html>

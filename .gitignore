@@ -1,0 +1,10 @@
+# Excel deliverable (not code — keep separately)
+*.xlsx
+*.xls
+
+# Images and uploads
+guide/
+uploads/
+
+# System files
+.sudo_as_admin_successful
