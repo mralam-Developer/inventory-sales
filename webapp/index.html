@@ -9,267 +9,623 @@
     --navy:    #1B2A4A;
     --navy-md: #2C3E6B;
     --navy-dk: #0F1A30;
+    --navy-lt: #25396B;
     --gold:    #C9A84C;
     --gold-lt: #FFF3CD;
+    --gold-dt: #B8922E;
     --white:   #FFFFFF;
-    --off-wht: #F8F9FC;
+    --off-wht: #F5F7FC;
     --slate:   #34495E;
-    --green:   #6AA84F;
-    --green-bg:#C6EFCE;
-    --yellow:  #FFC000;
-    --yellow-bg:#FFF2CC;
-    --red:     #F44336;
-    --red-bg:  #FFC7CE;
-    --grey-bd: #D0D7E2;
+    --slate-lt:#5D6D7E;
+    --green:   #27AE60;
+    --green-bg:#D5F5E3;
+    --green-dt:#1E8449;
+    --yellow:  #F39C12;
+    --yellow-bg:#FEF9E7;
+    --yellow-dt:#B7950B;
+    --red:     #E74C3C;
+    --red-bg:  #FDEDEC;
+    --red-dt:  #C0392B;
+    --grey-bd: #D5DBDB;
     --grey-bg: #F2F4F7;
+    --grey-lt: #EAECEE;
+    --shadow:  0 2px 8px rgba(0,0,0,0.08);
+    --shadow-lg: 0 6px 20px rgba(0,0,0,0.12);
   }
+
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     background: var(--off-wht);
     color: var(--slate);
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* ── NAVY BRAND STRIP ─────────────────────────────── */
+  /* ═══════════════════════════════════════════════════
+     NAVY GRADIENT BRAND STRIP
+     ═══════════════════════════════════════════════════ */
   .brand-strip {
-    background: var(--navy);
-    padding: 14px 0;
-    border-bottom: 3px solid var(--gold);
+    position: relative;
+    background: linear-gradient(135deg, var(--navy-dk) 0%, var(--navy) 55%, var(--navy-md) 100%);
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  }
+  .brand-strip::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 280px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.07));
+    pointer-events: none;
+  }
+  .brand-strip::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--gold);
   }
   .brand-inner {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 16px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    z-index: 1;
   }
-  .brand-logo { display: flex; align-items: center; gap: 12px; }
+  .brand-logo { display: flex; align-items: center; gap: 14px; }
   .brand-icon {
-    width: 42px; height: 42px;
-    background: var(--gold);
-    border-radius: 8px;
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dt) 100%);
+    border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 22px; font-weight: 900; color: var(--navy);
+    font-size: 24px; font-weight: 900; color: var(--navy);
+    box-shadow: 0 2px 8px rgba(201,168,76,0.4);
+    letter-spacing: 1px;
   }
   .brand-text { color: var(--white); }
-  .brand-text h1 { font-size: 18px; font-weight: 700; letter-spacing: 0.5px; margin: 0; }
-  .brand-text .sub { font-size: 11px; color: var(--gold); font-style: italic; margin-top: 2px; }
-  .brand-meta { color: var(--gold); font-size: 11px; text-align: right; }
-  .brand-meta .loc { color: var(--white); font-weight: 600; }
+  .brand-text h1 {
+    font-size: 20px; font-weight: 700; letter-spacing: 0.5px;
+    margin: 0; line-height: 1.2;
+  }
+  .brand-text .sub {
+    font-size: 12px; color: var(--gold); font-style: italic;
+    margin-top: 3px; letter-spacing: 0.3px;
+  }
+  .brand-meta {
+    color: rgba(255,255,255,0.75);
+    font-size: 12px;
+    text-align: right;
+    line-height: 1.6;
+  }
+  .brand-meta .loc {
+    color: var(--white); font-weight: 600; font-size: 13px;
+  }
+  .brand-meta .live-badge {
+    display: inline-block;
+    background: var(--green);
+    color: white;
+    font-size: 10px; font-weight: 700;
+    padding: 3px 8px; border-radius: 10px;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
 
-  /* ── KPI BAR ──────────────────────────────────────── */
+  /* ═══════════════════════════════════════════════════
+     KPI BAR
+     ═══════════════════════════════════════════════════ */
   .kpi-bar {
     background: var(--navy-dk);
     display: flex;
     flex-wrap: wrap;
-    border-bottom: 1px solid var(--navy-md);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
   }
   .kpi-item {
-    flex: 1 1 130px;
-    min-width: 110px;
-    padding: 12px 16px;
-    border-right: 1px solid var(--navy-md);
+    flex: 1 1 140px;
+    min-width: 120px;
+    padding: 14px 18px;
+    border-right: 1px solid rgba(255,255,255,0.06);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
   }
   .kpi-item:last-child { border-right: none; }
-  .kpi-val { font-size: 24px; font-weight: 800; color: var(--gold); line-height: 1; }
-  .kpi-lbl { font-size: 10px; color: var(--white); opacity: 0.7; margin-top: 4px;
-             text-transform: uppercase; letter-spacing: 0.5px; }
-  .kpi-green  .kpi-val { color: var(--green); }
-  .kpi-yellow .kpi-val { color: var(--yellow); }
-  .kpi-red    .kpi-val { color: var(--red); }
+  .kpi-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 30px; height: 2px;
+    border-radius: 2px;
+  }
+  .kpi-item.gold::after   { background: var(--gold); }
+  .kpi-item.green::after  { background: var(--green); }
+  .kpi-item.yellow::after { background: var(--yellow); }
+  .kpi-item.red::after    { background: var(--red); }
+  .kpi-item.navy::after   { background: var(--gold); opacity: 0.6; }
 
-  /* ── MAIN LAYOUT ──────────────────────────────────── */
-  .main-wrap { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
+  .kpi-top {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 4px;
+  }
+  .kpi-icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .kpi-icon.gold  { background: rgba(201,168,76,0.15); color: var(--gold); }
+  .kpi-icon.green { background: rgba(39,174,96,0.15);  color: var(--green); }
+  .kpi-icon.yellow { background: rgba(243,156,18,0.15); color: var(--yellow); }
+  .kpi-icon.red    { background: rgba(231,76,60,0.15);  color: var(--red); }
+  .kpi-icon.navy   { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); }
 
-  /* ── SECTION HEADER ───────────────────────────────── */
+  .kpi-val {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -0.5px;
+  }
+  .kpi-item.gold .kpi-val  { color: var(--gold); }
+  .kpi-item.green .kpi-val { color: var(--green); }
+  .kpi-item.yellow .kpi-val { color: var(--yellow); }
+  .kpi-item.red .kpi-val   { color: var(--red); }
+
+  .kpi-lbl {
+    font-size: 10px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    font-weight: 500;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     MAIN LAYOUT
+     ═══════════════════════════════════════════════════ */
+  .main-wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 24px 40px;
+  }
+
+  /* ── SECTION HEADERS ─────────────────────────────── */
   .sec-head {
     background: var(--navy);
     color: var(--white);
-    padding: 11px 18px;
-    border-radius: 7px;
-    margin-bottom: 16px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 18px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     font-size: 15px;
     font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
   }
-  .sec-head .icon { font-size: 17px; }
+  .sec-head::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 4px;
+    background: var(--gold);
+  }
+  .sec-head .icon { font-size: 18px; }
   .sec-head .badge {
     margin-left: auto;
     background: var(--gold);
     color: var(--navy);
     font-size: 11px;
-    padding: 4px 10px;
+    padding: 4px 12px;
     border-radius: 12px;
     font-weight: 700;
+    letter-spacing: 0.3px;
   }
 
-  /* ── FILTER BAR ───────────────────────────────────── */
-  .filter-bar {
+  /* ── TOOLBAR / FILTERS ───────────────────────────── */
+  .toolbar {
+    background: var(--white);
+    border: 1px solid var(--grey-bd);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 16px;
     align-items: center;
+    gap: 10px;
+    box-shadow: var(--shadow);
   }
-  .filter-bar label {
-    font-size: 12px; font-weight: 600; color: var(--slate); margin-right: 3px;
+  .toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
-  .filter-bar select, .filter-bar input {
-    padding: 8px 11px;
+  .toolbar-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--slate-lt);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 4px;
+  }
+  .toolbar select, .toolbar input {
+    padding: 8px 12px;
     border: 1px solid var(--grey-bd);
     border-radius: 6px;
     font-size: 13px;
     background: var(--white);
     color: var(--slate);
     outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
-  .filter-bar select:focus, .filter-bar input:focus {
+  .toolbar select:focus, .toolbar input:focus {
     border-color: var(--gold);
-    box-shadow: 0 0 0 2px var(--gold-lt);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
   }
-  .search-box { flex: 1 1 200px; min-width: 140px; }
+  .toolbar input::placeholder { color: #AAB7B8; }
 
-  /* ── INVENTORY GRID ───────────────────────────────── */
+  .search-box { flex: 1 1 220px; min-width: 160px; position: relative; }
+  .search-box input { padding-left: 34px; }
+  .search-box .search-icon {
+    position: absolute;
+    left: 11px; top: 50%;
+    transform: translateY(-50%);
+    color: #AAB7B8;
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  .toolbar .toolbar-action {
+    padding: 8px 16px;
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .toolbar .toolbar-action:hover { background: var(--navy-md); }
+
+  /* ── TOOLTIP / LAST UPDATED ──────────────────────── */
+  .source-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    font-size: 11px;
+    color: var(--slate-lt);
+    padding: 0 4px;
+  }
+  .source-bar a {
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .source-bar a:hover { text-decoration: underline; }
+  .sync-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .sync-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  /* ═══════════════════════════════════════════════════
+     INVENTORY GRID
+     ═══════════════════════════════════════════════════ */
   .inv-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-    gap: 13px;
-    margin-bottom: 36px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 14px;
+    margin-bottom: 40px;
   }
   .inv-card {
     background: var(--white);
     border: 1px solid var(--grey-bd);
-    border-radius: 9px;
-    padding: 15px;
+    border-radius: 10px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 9px;
-    transition: box-shadow 0.2s, transform 0.2s;
+    gap: 10px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     position: relative;
     overflow: hidden;
   }
-  .inv-card:hover {
-    box-shadow: 0 5px 18px rgba(0,0,0,0.11);
-    transform: translateY(-2px);
+  .inv-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--grey-bg);
   }
+  .inv-card.st-ok::before   { background: var(--green); }
+  .inv-card.st-low::before  { background: var(--yellow); }
+  .inv-card.st-out::before  { background: var(--red); }
+  .inv-card.st-check::before{ background: #E67E22; }
+
+  .inv-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--gold);
+  }
+
   .inv-card .card-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 8px;
+  }
+  .inv-card .sku-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .inv-card .sku-icon {
+    width: 22px; height: 22px;
+    background: var(--navy);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; color: var(--white);
+    flex-shrink: 0;
   }
   .inv-card .sku {
     font-size: 10px; font-weight: 700; color: var(--gold);
-    background: var(--gold-lt); padding: 3px 8px; border-radius: 3px;
+    background: var(--gold-lt); padding: 3px 7px; border-radius: 3px;
     letter-spacing: 0.5px;
   }
   .inv-card .status-badge {
-    font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 10px;
-    text-transform: uppercase; letter-spacing: 0.4px;
+    font-size: 10px; font-weight: 700;
+    padding: 4px 10px; border-radius: 12px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    display: flex; align-items: center; gap: 4px;
   }
-  .st-ok   { background: var(--green-bg);  color: #375623; }
-  .st-low  { background: var(--yellow-bg); color: #7D6608; }
-  .st-out  { background: var(--red-bg);    color: #9C0006; }
-  .st-check{ background: #FFEBE6;          color: #B43A1A; }
+  .status-badge .status-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+  }
+  .st-ok .status-badge   { background: var(--green-bg);  color: #1E8449; }
+  .st-ok .status-dot     { background: var(--green); }
+  .st-low .status-badge  { background: var(--yellow-bg); color: #B7950B; }
+  .st-low .status-dot    { background: var(--yellow); }
+  .st-out .status-badge  { background: var(--red-bg);    color: #C0392B; }
+  .st-out .status-dot    { background: var(--red); }
+  .st-check .status-badge{ background: #FDEBD0;         color: #B45F06; }
+  .st-check .status-dot  { background: #E67E22; }
 
-  .inv-card .item-name { font-size: 16px; font-weight: 700; color: var(--navy); line-height: 1.3; }
-  .inv-card .item-urdu {
-    font-size: 12px; color: var(--slate); font-style: italic;
-    direction: rtl; text-align: right; margin-top: -3px;
+  .inv-card .item-name {
+    font-size: 15px; font-weight: 700; color: var(--navy);
+    line-height: 1.35;
   }
-  .inv-card .item-supplier { font-size: 11px; color: var(--slate); opacity: 0.7; }
-  .inv-card .supplier-tag {
-    display: inline-block;
-    font-size: 10px; font-weight: 600; color: var(--navy);
-    background: var(--grey-bg); padding: 2px 7px; border-radius: 3px;
+  .inv-card .item-urdu {
+    font-size: 12px; color: var(--slate-lt); font-style: italic;
+    direction: rtl; text-align: right; margin-top: -2px;
+    line-height: 1.4;
+  }
+  .inv-card .supplier-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--slate-lt);
     margin-top: 2px;
   }
+  .supplier-tag {
+    display: inline-block;
+    background: var(--grey-bg);
+    color: var(--slate);
+    font-size: 10px; font-weight: 600;
+    padding: 2px 7px; border-radius: 3px;
+  }
 
-  .inv-card .card-stats {
+  .inv-card .stats-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 6px;
-    margin-top: 5px;
+    gap: 7px;
+    margin-top: 6px;
   }
   .stat-box {
     background: var(--grey-bg);
-    border-radius: 6px;
-    padding: 7px 6px;
+    border-radius: 7px;
+    padding: 8px 7px;
     text-align: center;
+    transition: background 0.2s;
   }
-  .stat-box .num {
-    font-size: 16px; font-weight: 700; color: var(--navy); line-height: 1.2;
+  .stat-box .stat-num {
+    font-size: 17px; font-weight: 800; color: var(--navy);
+    line-height: 1.2;
   }
-  .stat-box .lbl {
-    font-size: 9px; color: var(--slate); opacity: 0.7;
-    text-transform: uppercase; letter-spacing: 0.3px; margin-top: 2px;
+  .stat-box .stat-lbl {
+    font-size: 9px; color: var(--slate-lt); opacity: 0.8;
+    text-transform: uppercase; letter-spacing: 0.4px;
+    margin-top: 3px; font-weight: 600;
   }
-  .stat-box.highlight .num { color: var(--gold); }
+  .stat-box.highlight .stat-num { color: var(--gold); }
+  .stat-box.danger .stat-num    { color: var(--red); }
 
-  .inv-card .price-row {
+  .inv-card .bottom-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 3px;
-    padding-top: 9px;
+    margin-top: 4px;
+    padding-top: 10px;
     border-top: 1px dashed var(--grey-bd);
   }
-  .price-tag { font-size: 11px; color: var(--slate); }
-  .price-tag strong { color: var(--navy); font-size: 15px; }
-  .stock-indicator {
-    font-size: 11px; font-weight: 600; color: var(--slate);
-    display: flex; align-items: center; gap: 4px;
+  .price-info {
+    font-size: 12px; color: var(--slate-lt);
+  }
+  .price-info strong {
+    color: var(--navy); font-size: 14px; font-weight: 700;
+  }
+  .price-info .selling {
+    color: var(--green); font-weight: 700;
+  }
+  .stock-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
   .stock-bar {
-    width: 50px; height: 5px; background: var(--grey-bg);
-    border-radius: 3px; overflow: hidden; display: inline-block;
+    width: 52px; height: 6px;
+    background: var(--grey-bg);
+    border-radius: 4px;
+    overflow: hidden;
   }
   .stock-bar-fill {
-    height: 100%; background: var(--green); border-radius: 3px;
-    transition: width 0.4s;
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s ease, background 0.3s;
   }
-  .stock-bar-fill.low { background: var(--yellow); }
-  .stock-bar-fill.critical { background: var(--red); }
+  .stock-bar-fill.full    { background: var(--green); }
+  .stock-bar-fill.medium  { background: var(--yellow); }
+  .stock-bar-fill.low     { background: var(--red); }
+  .stock-pct {
+    font-size: 11px; font-weight: 700; color: var(--slate-lt);
+    min-width: 28px;
+  }
+  .stock-pct.low   { color: var(--red); }
+  .stock-pct.medium { color: var(--yellow); }
+
+  /* ── LOW STOCK ALERT BANNER ──────────────────────── */
+  .alert-banner {
+    background: linear-gradient(90deg, var(--red-bg) 0%, #FDF2F2 100%);
+    border: 1px solid #F5B7B1;
+    border-left: 4px solid var(--red);
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: #922B21;
+  }
+  .alert-banner .alert-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .alert-banner .alert-text strong { color: var(--red-dt); }
+  .alert-banner .alert-link {
+    color: var(--navy);
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 8px;
+  }
 
   /* ── EMPTY STATE ──────────────────────────────────── */
   .empty-msg {
     grid-column: 1 / -1;
     text-align: center;
-    padding: 40px;
-    color: var(--slate);
-    opacity: 0.6;
+    padding: 50px 20px;
+    color: var(--slate-lt);
+    opacity: 0.65;
     font-style: italic;
+    font-size: 14px;
+    background: var(--white);
+    border: 1px dashed var(--grey-bd);
+    border-radius: 10px;
   }
 
   /* ── FOOTER ───────────────────────────────────────── */
   .foot {
     text-align: center;
     padding: 20px;
-    color: var(--slate);
-    opacity: 0.45;
+    color: var(--slate-lt);
+    opacity: 0.5;
     font-size: 11px;
     border-top: 1px solid var(--grey-bd);
-    margin-top: 10px;
+    margin-top: 20px;
+    line-height: 1.6;
+  }
+  .foot a {
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  /* ── LOADING OVERLAY ─────────────────────────────── */
+  .loading-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(27,42,74,0.7);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+  }
+  .loading-overlay.active { display: flex; }
+  .loading-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 30px 40px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    max-width: 340px;
+  }
+  .loading-spinner {
+    width: 44px; height: 44px;
+    border: 4px solid var(--grey-bg);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 14px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-card p {
+    font-size: 13px; color: var(--slate-lt);
+    margin-top: 6px;
+  }
+  .loading-card .loading-title {
+    font-size: 15px; font-weight: 700; color: var(--navy);
+    margin-bottom: 4px;
   }
 
   /* ── RESPONSIVE ───────────────────────────────────── */
-  @media (max-width: 640px) {
-    .card-stats { grid-template-columns: 1fr 1fr; }
-    .kpi-item { flex: 1 1 90px; min-width: 80px; padding: 10px 12px; }
-    .kpi-val { font-size: 20px; }
-    .brand-inner { flex-direction: column; gap: 8px; text-align: center; }
+  @media (max-width: 768px) {
+    .brand-inner { flex-direction: column; gap: 10px; text-align: center; }
     .brand-meta { text-align: center; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .kpi-item { flex: 1 1 100px; min-width: 90px; padding: 10px 12px; }
+    .kpi-val { font-size: 20px; }
+    .inv-grid { grid-template-columns: 1fr; }
+    .main-wrap { padding: 16px 14px 30px; }
+  }
+  @media (max-width: 480px) {
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .toolbar { flex-direction: column; align-items: stretch; }
+    .toolbar-group { flex-wrap: wrap; }
+    .search-box { flex: 1 1 auto; }
   }
 </style>
 </head>
 <body>
+
+<!-- ═══════════════════ LOADING OVERLAY ═══════════════ -->
+<div class="loading-overlay" id="loading">
+  <div class="loading-card">
+    <div class="loading-spinner"></div>
+    <div class="loading-title">Loading Inventory…</div>
+    <p>Fetching latest data from Google Sheets</p>
+  </div>
+</div>
 
 <!-- ═══════════════════ BRAND STRIP ═══════════════════ -->
 <div class="brand-strip">
@@ -278,81 +634,142 @@
       <div class="brand-icon">SC</div>
       <div class="brand-text">
         <h1>Shah Co. — Stock Inventory</h1>
-        <div class="sub">Wholesale Business · Peshawar · Stock Record</div>
+        <div class="sub">Wholesale Business · Peshawar · Live Stock Record</div>
       </div>
     </div>
     <div class="brand-meta">
       <div class="loc">Peshawar, Khyber Pakhtunkhwa</div>
-      <div>Updated: <span id="today-date"></span></div>
+      <div>
+        <span class="live-badge">● LIVE DATA</span>
+        <div style="margin-top:4px;font-size:10px;opacity:0.6;">Synced from Google Sheets</div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ═══════════════════ KPI BAR ═══════════════════════ -->
 <div class="kpi-bar" id="kpi-bar">
-  <div class="kpi-item">
+  <div class="kpi-item navy">
+    <div class="kpi-top">
+      <div class="kpi-icon navy">📦</div>
+    </div>
     <div class="kpi-val" id="kpi-total">—</div>
     <div class="kpi-lbl">Total Items</div>
   </div>
-  <div class="kpi-item kpi-green">
+  <div class="kpi-item green">
+    <div class="kpi-top">
+      <div class="kpi-icon green">✓</div>
+    </div>
     <div class="kpi-val" id="kpi-instock">—</div>
     <div class="kpi-lbl">In Stock</div>
   </div>
-  <div class="kpi-item kpi-yellow">
+  <div class="kpi-item yellow">
+    <div class="kpi-top">
+      <div class="kpi-icon yellow">⚠</div>
+    </div>
     <div class="kpi-val" id="kpi-low">—</div>
     <div class="kpi-lbl">Low Stock</div>
   </div>
-  <div class="kpi-item kpi-red">
+  <div class="kpi-item red">
+    <div class="kpi-top">
+      <div class="kpi-icon red">✕</div>
+    </div>
     <div class="kpi-val" id="kpi-out">—</div>
     <div class="kpi-lbl">Out of Stock</div>
   </div>
-  <div class="kpi-item">
+  <div class="kpi-item gold">
+    <div class="kpi-top">
+      <div class="kpi-icon gold">Rs</div>
+    </div>
     <div class="kpi-val" id="kpi-value">Rs 0</div>
-    <div class="kpi-lbl">Stock Value (Rs)</div>
+    <div class="kpi-lbl">Total Stock Value</div>
   </div>
 </div>
 
 <div class="main-wrap">
 
-  <!-- ═══════════════════ INVENTORY ═══════════════════ -->
+  <!-- ═══════════════════ ALERT BANNER ═══════════════ -->
+  <div id="alert-banner" style="display:none;" class="alert-banner">
+    <div class="alert-icon">🚨</div>
+    <div class="alert-text">
+      <strong>Low Stock Alert:</strong>
+      <span id="alert-text-body"></span>
+      <a class="alert-link" href="#low-stock-section">Review low stock items →</a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ INVENTORY ══════════════════ -->
   <div class="sec-head">
     <span class="icon">📦</span> Stock Inventory
     <span class="badge" id="item-count-badge">24 items</span>
   </div>
 
-  <div class="filter-bar">
-    <label for="filter-status">Status:</label>
-    <select id="filter-status">
-      <option value="all">All Items</option>
-      <option value="OK">OK (In Stock)</option>
-      <option value="Low">Low Stock</option>
-      <option value="Out of stock">Out of Stock</option>
-    </select>
+  <!-- ── TOOLBAR ────────────────────────────────────── -->
+  <div class="toolbar">
+    <div class="toolbar-group">
+      <span class="toolbar-label">Status</span>
+      <select id="filter-status">
+        <option value="all">All Items</option>
+        <option value="OK">✅ OK (In Stock)</option>
+        <option value="Low">⚠ Low Stock</option>
+        <option value="Out of stock">🔴 Out of Stock</option>
+      </select>
+    </div>
 
-    <label for="filter-supplier">Supplier:</label>
-    <select id="filter-supplier">
-      <option value="all">All Suppliers</option>
-    </select>
+    <div class="toolbar-group">
+      <span class="toolbar-label">Supplier</span>
+      <select id="filter-supplier">
+        <option value="all">All Suppliers</option>
+      </select>
+    </div>
 
     <div class="search-box">
-      <input type="text" id="search-box" placeholder="🔍 Search by name, SKU, or Urdu…" />
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-box"
+             placeholder="Search by name, SKU, Urdu, or supplier…"
+             autocomplete="off" />
+    </div>
+
+    <button class="toolbar-action" id="btn-refresh" title="Refresh data from Google Sheets">
+      🔄 Refresh
+    </button>
+  </div>
+
+  <!-- ── SOURCE BAR ─────────────────────────────────── -->
+  <div class="source-bar">
+    <div class="sync-status">
+      <span class="sync-dot"></span>
+      <span>Data sourced from:</span>
+      <a id="gsheet-link" href="" target="_blank">Google Sheets</a>
+      <span id="last-updated" style="margin-left:6px;opacity:0.7;"></span>
+    </div>
+    <div style="opacity:0.6;">
+      <span id="showing-count">Showing 24 of 24 items</span>
     </div>
   </div>
 
+  <!-- ── GRID ───────────────────────────────────────── -->
   <div class="inv-grid" id="inv-grid"></div>
 
 </div>
 
 <div class="foot">
-  Shah Co. Stock Inventory · Peshawar · Data from Stock_Inventory.xlsx
+  Shah Co. · Stock Inventory System · Peshawar, Khyber Pakhtunkhwa<br>
+  Data automatically synced from <a href="https://docs.google.com/spreadsheets/d/1f-BisiOUufklx2av8D_3NMHqjNugPo_Xg8W4bDmXP4E/edit" target="_blank">Stock Inventory — Store</a>
 </div>
 
 <script>
 /* ═══════════════════════════════════════════════════════
-   STOCK DATA — 24 items · STK001–STK024
-   Sourced from Stock_Inventory.xlsx (v2 Premium Edition)
+   GOOGLE SHEETS PUBLISHED CSV URL
+   The website reads inventory data from this URL.
+   To update data: edit the Google Sheet → changes appear here.
    ═══════════════════════════════════════════════════════ */
-const ITEMS = [
+const SHEET_CSV_URL =
+  'https://docs.google.com/spreadsheets/d/1f-BisiOUufklx2av8D_3NMHqjNugPo_Xg8W4bDmXP4E/' +
+  'gviz/tq?tqx=out:csv&sheet=Stock'
+
+// ── FALLBACK DATA (used if Google Sheets is unreachable) ──
+const FALLBACK_ITEMS = [
   { sku:"STK001", name:"Upper Body",        urdu:"Upper باڈی",              sup:"ABC Traders",   minStock:30, cost:35,  sell:55  },
   { sku:"STK002", name:"Cat",               urdu:"کیٹ",                       sup:"XYZ Wholesale", minStock:30, cost:20,  sell:35  },
   { sku:"STK003", name:"Bolt Jora",         urdu:"بلوٹ جوڑا",                 sup:"ABC Traders",   minStock:40, cost:12,  sell:20  },
@@ -379,8 +796,7 @@ const ITEMS = [
   { sku:"STK024", name:"Press Ring",        urdu:"پریس رینگ",                 sup:"ABC Traders",   minStock:15, cost:90,  sell:130 },
 ];
 
-// Current stock levels (from Excel computed values)
-const STOCK = {
+const FALLBACK_STOCK = {
   STK001:130, STK002:100, STK003:80,  STK004:200, STK005:200,
   STK006:200, STK007:60,  STK008:120, STK009:200, STK010:200,
   STK011:200, STK012:200, STK013:10,  STK014:200, STK015:200,
@@ -389,111 +805,278 @@ const STOCK = {
 };
 
 /* ═══════════════════════════════════════════════════════
-   HELPERS
+   FETCH DATA FROM GOOGLE SHEETS (CSV)
    ═══════════════════════════════════════════════════════ */
-function getItem(sku)  { return ITEMS.find(i => i.sku === sku); }
-function getStatus(i) {
-  const s = STOCK[i.sku];
-  if (s === undefined || s < 0) return 'Check entries';
-  if (s === 0)                  return 'Out of stock';
-  if (s <= i.minStock)          return 'Low';
-  return 'OK';
-}
-function statusClass(st) {
-  if (st === 'OK')         return 'st-ok';
-  if (st === 'Low')        return 'st-low';
-  if (st === 'Out of stock') return 'st-out';
-  return 'st-check';
-}
-function fmtRs(n) { return 'Rs ' + Number(n).toLocaleString('en-PK'); }
+let currentData = [];
 
-function stockPercent(i) {
-  // Max reasonable stock = 5× min stock
-  const max = i.minStock * 5;
-  return Math.min(100, Math.round((STOCK[i.sku] || 0) / max * 100));
+async function fetchFromGoogleSheets() {
+  try {
+    const response = await fetch(SHEET_CSV_URL);
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const text = await response.text();
+
+    // Parse CSV
+    const rows = parseCSV(text);
+    // rows[0] is header, rows[1..] are data
+    if (rows.length < 2) throw new Error('No data rows found');
+
+    const items = [];
+    const stock  = {};
+
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      if (!row || !row[0]) continue; // skip empty rows
+
+      const sku  = (row[0]  || '').trim();   // A: Item Code
+      const name = (row[1]  || '').trim();   // B: Item Name
+      const urdu = (row[2]  || '').trim();   // C: Urdu Name
+      const unit = (row[3]  || '').trim();   // D: Unit
+      const open = parseNum(row[4]);          // E: Opening Stock
+      // F: Stock In  (formula - not readable from CSV)
+      // G: Stock Out (formula - not readable from CSV)
+      const curr = parseNum(row[7]);          // H: Current Stock (formula result)
+      const min  = parseNum(row[8]);          // I: Minimum Stock
+      const cost = parseNum(row[9]);          // J: Cost Price
+      // K: Selling Price - may be formula, try parsing
+      const sell = parseNum(row[10]) || 0;    // K: Selling Price
+      const sup  = (row[11] || '').trim();    // L: Supplier
+      // M: Status (formula)
+      // N: Reorder Qty (formula)
+
+      if (!sku) continue;
+
+      items.push({
+        sku, name, urdu: urdu || name, sup: sup || '—',
+        minStock: min || 0,
+        cost: cost || 0,
+        sell: sell || 0,
+        unit: unit || 'Pcs'
+      });
+
+      // Current stock: use formula result if available, else opening stock
+      stock[sku] = (curr && curr > 0) ? curr : open;
+    }
+
+    return { items, stock };
+
+  } catch (err) {
+    console.warn('Google Sheets fetch failed, using fallback:', err.message);
+    return null;
+  }
+}
+
+function parseCSV(text) {
+  const rows = [];
+  let current = '';
+  let inQuotes = false;
+  let row = [];
+
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    const next = text[i + 1];
+
+    if (inQuotes) {
+      if (ch === '"' && next === '"') {
+        current += '"';
+        i++; // skip next quote
+      } else if (ch === '"') {
+        inQuotes = false;
+      } else {
+        current += ch;
+      }
+    } else {
+      if (ch === '"') {
+        inQuotes = true;
+      } else if (ch === ',') {
+        row.push(current);
+        current = '';
+      } else if (ch === '\n' || (ch === '\r' && next === '\n')) {
+        if (ch === '\r') i++;
+        row.push(current);
+        rows.push(row);
+        row = [];
+        current = '';
+      } else if (ch === '\r') {
+        row.push(current);
+        rows.push(row);
+        row = [];
+        current = '';
+      } else {
+        current += ch;
+      }
+    }
+  }
+  // last row
+  if (current || row.length > 0) {
+    row.push(current);
+    rows.push(row);
+  }
+
+  // Clean BOM and header row estimation
+  if (rows.length > 0 && rows[0][0] && rows[0][0].startsWith('\uFEFF')) {
+    rows[0][0] = rows[0][0].slice(1);
+  }
+
+  // Google CSV may include a header row like "Day,Mon,Tue..."
+  // or the sheet data starts with headers. We detect by checking
+  // if first row looks like headers (contains "Item Code" or similar)
+  return rows;
+}
+
+function parseNum(val) {
+  if (val === undefined || val === null || val === '') return 0;
+  const n = parseFloat(String(val).replace(/,/g, ''));
+  return isNaN(n) ? 0 : n;
 }
 
 /* ═══════════════════════════════════════════════════════
-   KPI UPDATE
+   COMPUTED STATE
    ═══════════════════════════════════════════════════════ */
-function updateKPIs() {
-  const total     = ITEMS.length;
-  const instock   = ITEMS.filter(i => getStatus(i) === 'OK').length;
-  const low       = ITEMS.filter(i => getStatus(i) === 'Low').length;
-  const out       = ITEMS.filter(i => getStatus(i) === 'Out of stock').length;
-  const totalVal  = ITEMS.reduce((sum, i) => sum + (STOCK[i.sku]||0) * i.sell, 0);
+function getStatus(item, stockVal) {
+  const s = stockVal ?? 0;
+  if (s < 0)       return 'Check entries';
+  if (s === 0)     return 'Out of stock';
+  if (s <= item.minStock) return 'Low';
+  return 'OK';
+}
+
+function statusClass(st) {
+  if (st === 'OK')           return 'st-ok';
+  if (st === 'Low')          return 'st-low';
+  if (st === 'Out of stock') return 'st-out';
+  return 'st-check';
+}
+
+function fmtRs(n) {
+  return 'Rs ' + Number(n).toLocaleString('en-PK');
+}
+
+function stockPercent(item, stockVal) {
+  const max = Math.max(item.minStock * 5, 100);
+  return Math.min(100, Math.max(0, Math.round(((stockVal ?? 0) / max) * 100)));
+}
+
+/* ═══════════════════════════════════════════════════════
+   RENDER
+   ═══════════════════════════════════════════════════════ */
+function render() {
+  const grid      = document.getElementById('inv-grid');
+  const filter    = getFilter();
+  const items     = currentData.items;
+  const stock     = currentData.stock;
+
+  // Build enriched items with computed stock + status
+  const enriched = items.map(i => ({
+    ...i,
+    currentStock: stock[i.sku] ?? 0,
+    status: getStatus(i, stock[i.sku] ?? 0)
+  }));
+
+  const visible = enriched.filter(i => {
+    if (filter.status !== 'all' && i.status !== filter.status) return false;
+    if (filter.supplier !== 'all' && i.sup !== filter.supplier) return false;
+    const q = (filter.query || '').toLowerCase();
+    if (q) {
+      const haystack = (i.sku + ' ' + i.name + ' ' + i.urdu + ' ' + i.sup).toLowerCase();
+      if (!haystack.includes(q)) return false;
+    }
+    return true;
+  });
+
+  // KPIs
+  const total    = enriched.length;
+  const instock  = enriched.filter(i => i.status === 'OK').length;
+  const low      = enriched.filter(i => i.status === 'Low').length;
+  const out      = enriched.filter(i => i.status === 'Out of stock').length;
+  const totalVal = enriched.reduce((sum, i) => sum + (i.currentStock * i.sell), 0);
 
   document.getElementById('kpi-total').textContent    = total;
   document.getElementById('kpi-instock').textContent  = instock;
   document.getElementById('kpi-low').textContent      = low;
   document.getElementById('kpi-out').textContent      = out;
   document.getElementById('kpi-value').textContent    = fmtRs(totalVal);
-}
+  document.getElementById('item-count-badge').textContent = total + ' item' + (total !== 1 ? 's' : '');
+  document.getElementById('showing-count').textContent   = 'Showing ' + visible.length + ' of ' + total + ' items';
 
-/* ═══════════════════════════════════════════════════════
-   RENDER INVENTORY GRID
-   ═══════════════════════════════════════════════════════ */
-function renderInventory(filter) {
-  const grid = document.getElementById('inv-grid');
-  const items = ITEMS.filter(i => {
-    const st = getStatus(i);
-    if (filter.status !== 'all' && st !== filter.status) return false;
-    if (filter.supplier !== 'all' && i.sup !== filter.supplier) return false;
-    const q = (filter.query || '').toLowerCase();
-    if (q && !i.sku.toLowerCase().includes(q) &&
-        !i.name.toLowerCase().includes(q) &&
-        !i.urdu.includes(q) &&
-        !i.sup.toLowerCase().includes(q)) return false;
-    return true;
-  });
+  // Alert banner for low stock
+  const alertBanner = document.getElementById('alert-banner');
+  const alertBody   = document.getElementById('alert-text-body');
+  if (low > 0) {
+    const lowItems = enriched.filter(i => i.status === 'Low');
+    alertBody.textContent = lowItems.map(i =>
+      i.name + ' (' + i.sku + '): ' + i.currentStock + ' pcs remaining'
+    ).join(', ') + '. ' + (low > 1 ? 'Time to reorder.' : 'Time to reorder.');
+    alertBanner.style.display = 'flex';
+  } else {
+    alertBanner.style.display = 'none';
+  }
 
-  document.getElementById('item-count-badge').textContent =
-    items.length + ' item' + (items.length !== 1 ? 's' : '');
-
-  if (items.length === 0) {
-    grid.innerHTML = '<div class="empty-msg">No items match the current filter.</div>';
+  // Render cards
+  if (visible.length === 0) {
+    grid.innerHTML = '<div class="empty-msg">📭 No items match your current filter.<br>Try adjusting the status, supplier, or search.</div>';
     return;
   }
 
-  grid.innerHTML = items.map(i => {
-    const st     = getStatus(i);
+  grid.innerHTML = visible.map(i => {
+    const st     = i.status;
     const stCls  = statusClass(st);
-    const stock  = STOCK[i.sku] ?? 0;
-    const pct    = stockPercent(i);
-    const barCls = pct <= 20 ? 'critical' : (pct <= 50 ? 'low' : '');
-    const isLow  = stock > 0 && stock <= i.minStock;
+    const stock  = i.currentStock;
+    const min    = i.minStock;
+    const pct    = stockPercent(i, stock);
+    const barCls = pct <= 20 ? 'low' : (pct <= 50 ? 'medium' : 'full');
+    const isLow  = stock > 0 && stock <= min;
+    const isOut  = stock === 0;
+    const isOver = stock > min * 3;
 
     return `
-      <div class="inv-card">
+      <div class="inv-card ${stCls}">
         <div class="card-top">
-          <span class="sku">${i.sku}</span>
-          <span class="status-badge ${stCls}">${st}</span>
+          <div class="sku-box">
+            <div class="sku-icon">${i.sku.slice(3)}</div>
+            <span class="sku">${i.sku}</span>
+          </div>
+          <span class="status-badge">
+            <span class="status-dot"></span>
+            ${st === 'OK' ? 'OK' : st === 'Low' ? 'Low' : st === 'Out of stock' ? 'Out' : st}
+          </span>
         </div>
+
         <div class="item-name">${i.name}</div>
         <div class="item-urdu">${i.urdu}</div>
-        <div class="supplier-tag">📦 ${i.sup}</div>
-        <div class="card-stats">
-          <div class="stat-box ${isLow ? 'highlight' : ''}">
-            <div class="num">${stock}</div>
-            <div class="lbl">In Stock</div>
+
+        <div class="supplier-row">
+          <span>Supplier:</span>
+          <span class="supplier-tag">${i.sup}</span>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-box ${isLow || isOut ? 'danger' : isOver ? 'highlight' : ''}">
+            <div class="stat-num">${stock}</div>
+            <div class="stat-lbl">In Stock</div>
           </div>
           <div class="stat-box">
-            <div class="num">${i.minStock}</div>
-            <div class="lbl">Min. Stock</div>
+            <div class="stat-num">${min}</div>
+            <div class="stat-lbl">Min. Stock</div>
           </div>
           <div class="stat-box">
-            <div class="num">${i.cost}</div>
-            <div class="lbl">Cost (Rs)</div>
+            <div class="stat-num">${fmtRs(i.cost)}</div>
+            <div class="stat-lbl">Cost</div>
           </div>
           <div class="stat-box">
-            <div class="num">${i.sell}</div>
-            <div class="lbl">Sell (Rs)</div>
+            <div class="stat-num">${fmtRs(i.sell)}</div>
+            <div class="stat-lbl">Sell Price</div>
           </div>
         </div>
-        <div class="stock-indicator">
-          <span>Stock level</span>
-          <div class="stock-bar">
-            <div class="stock-bar-fill ${barCls}" style="width:${pct}%"></div>
+
+        <div class="bottom-row">
+          <div class="price-info">
+            Selling: <strong class="selling">${fmtRs(i.sell)}</strong> / ${i.unit}
+          </div>
+          <div class="stock-bar-wrap">
+            <div class="stock-bar">
+              <div class="stock-bar-fill ${barCls}" style="width:${pct}%"></div>
+            </div>
+            <span class="stock-pct ${barCls}">${pct}%</span>
           </div>
         </div>
       </div>`;
@@ -501,43 +1084,80 @@ function renderInventory(filter) {
 }
 
 /* ═══════════════════════════════════════════════════════
-   FILTER LOGIC
+   FILTERS
    ═══════════════════════════════════════════════════════ */
 const filterState = { status: 'all', supplier: 'all', query: '' };
 
-function updateFilters() {
-  filterState.status   = document.getElementById('filter-status').value;
-  filterState.supplier = document.getElementById('filter-supplier').value;
-  filterState.query    = document.getElementById('search-box').value.trim();
-  renderInventory(filterState);
+function getFilter() { return filterState; }
+
+function setupFilters() {
+  const statusSel   = document.getElementById('filter-status');
+  const supplierSel = document.getElementById('filter-supplier');
+  const searchBox   = document.getElementById('search-box');
+
+  // Populate suppliers
+  const suppliers = [...new Set(currentData.items.map(i => i.sup))].sort();
+  suppliers.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s; opt.textContent = s;
+    supplierSel.appendChild(opt);
+  });
+
+  statusSel.addEventListener('change', () => {
+    filterState.status = statusSel.value; render();
+  });
+  supplierSel.addEventListener('change', () => {
+    filterState.supplier = supplierSel.value; render();
+  });
+  searchBox.addEventListener('input', () => {
+    filterState.query = searchBox.value.trim(); render();
+  });
+
+  document.getElementById('btn-refresh').addEventListener('click', async () => {
+    document.getElementById('btn-refresh').textContent = '⏳ Loading…';
+    document.getElementById('btn-refresh').disabled = true;
+    await loadData();
+    document.getElementById('btn-refresh').textContent = '🔄 Refresh';
+    document.getElementById('btn-refresh').disabled = false;
+  });
 }
 
-document.getElementById('filter-status').addEventListener('change', updateFilters);
-document.getElementById('filter-supplier').addEventListener('change', updateFilters);
-document.getElementById('search-box').addEventListener('input', updateFilters);
-
-/* ── SUPPLIER DROPDOWN ──────────────────────────────── */
-const suppliers = [...new Set(ITEMS.map(i => i.sup))].sort();
-const supSel = document.getElementById('filter-supplier');
-suppliers.forEach(s => {
-  const opt = document.createElement('option');
-  opt.value = s; opt.textContent = s;
-  supSel.appendChild(opt);
-});
-
 /* ═══════════════════════════════════════════════════════
-   DATE
+   LOAD DATA
    ═══════════════════════════════════════════════════════ */
-document.getElementById('today-date').textContent =
-  new Date().toLocaleDateString('en-PK', {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-  });
+async function loadData() {
+  document.getElementById('loading').classList.add('active');
+
+  const data = await fetchFromGoogleSheets();
+
+  if (data) {
+    currentData = data;
+    document.getElementById('last-updated').textContent =
+      'Updated: ' + new Date().toLocaleTimeString('en-PK', {
+        hour: '2-digit', minute: '2-digit', second: '2-digit'
+      });
+  } else {
+    // Use fallback
+    currentData = {
+      items: FALLBACK_ITEMS.map(i => ({ ...i })),
+      stock: { ...FALLBACK_STOCK }
+    };
+    document.getElementById('last-updated').textContent =
+      'Showing cached data (Google Sheets unavailable)';
+  }
+
+  document.getElementById('loading').classList.remove('active');
+  setupFilters();
+  render();
+}
 
 /* ═══════════════════════════════════════════════════════
    INIT
    ═══════════════════════════════════════════════════════ */
-updateKPIs();
-renderInventory(filterState);
+document.getElementById('gsheet-link').href =
+  'https://docs.google.com/spreadsheets/d/1f-BisiOUufklx2av8D_3NMHqjNugPo_Xg8W4bDmXP4E/edit';
+
+loadData();
 </script>
 </body>
 </html>
