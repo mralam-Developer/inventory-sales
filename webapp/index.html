@@ -1411,11 +1411,54 @@ async function loadData(){
 }
 
 /* ═══════════════════════════════════════════════════════
+   AUTO-SYNC — polls Google Sheets every 60 seconds
+   ═══════════════════════════════════════════════════════ */
+const AUTO_SYNC_MS = 60000; // 60 seconds
+let autoSyncTimer = null;
+let syncInProgress = false;
+
+async function autoSync(){
+  if (syncInProgress) return;
+  syncInProgress = true;
+
+  // Subtle sync indicator
+  const dot = document.getElementById('sync-dot');
+  dot.className = 'sync-dot pending';
+  document.getElementById('last-updated').textContent =
+    'Syncing…';
+
+  try {
+    const data = await fetchFromGoogleSheets();
+    if (data && data.items.length){
+      currentData = data;
+      dataSource  = 'google';
+      const now = new Date();
+      document.getElementById('last-updated').textContent =
+        'Auto-synced: '+now.toLocaleTimeString('en-PK',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      // Re-render with current filters
+      render();
+    }
+  } catch(e){
+    console.warn('Auto-sync failed:', e.message);
+  }
+
+  syncInProgress = false;
+  dot.className = 'sync-dot';
+}
+
+function startAutoSync(){
+  // Initial sync after 5 seconds (lets the page load first)
+  setTimeout(autoSync, 5000);
+  // Then every 60 seconds
+  autoSyncTimer = setInterval(autoSync, AUTO_SYNC_MS);
+}
+
+/* ═══════════════════════════════════════════════════════
    INIT
    ═══════════════════════════════════════════════════════ */
 document.getElementById('gsheet-link').href =
   'https://docs.google.com/spreadsheets/d/1f-BisiOUufklx2av8D_3NMHqjNugPo_Xg8W4bDmXP4E/edit';
-loadData();
+loadData().then(startAutoSync);
 </script>
 </body>
 </html>
