@@ -1,0 +1,38 @@
+{
+  "generated": "2026-11-10-from-google-sheets-connector",
+  "source": "https://docs.google.com/spreadsheets/d/1f-BisiOUufklx2av8D_3NMHqjNugPo_Xg8W4bDmXP4E/edit",
+  "items": [
+    { "sku": "STK001", "name": "Upper Body",        "urdu": "Upper باڈی",              "sup": "ABC Traders",   "minStock": 30, "cost": 35,  "sell": 55,  "unit": "Pcs" },
+    { "sku": "STK002", "name": "Cat",               "urdu": "کیٹ",                       "sup": "XYZ Wholesale", "minStock": 30, "cost": 20,  "sell": 35,  "unit": "Pcs" },
+    { "sku": "STK003", "name": "Bolt Jora",         "urdu": "بلوٹ جوڑا",                 "sup": "ABC Traders",   "minStock": 40, "cost": 12,  "sell": 20,  "unit": "Pcs" },
+    { "sku": "STK004", "name": "Barrel",            "urdu": "بیرل",                      "sup": "Local Market",  "minStock": 20, "cost": 45,  "sell": 70,  "unit": "Pcs" },
+    { "sku": "STK005", "name": "Zaha",              "urdu": "زخہ",                       "sup": "XYZ Wholesale", "minStock": 20, "cost": 18,  "sell": 30,  "unit": "Pcs" },
+    { "sku": "STK006", "name": "Poungee",           "urdu": "پونگی",                     "sup": "ABC Traders",   "minStock": 30, "cost": 22,  "sell": 38,  "unit": "Pcs" },
+    { "sku": "STK007", "name": "Gas Pipe",          "urdu": "گیس پائپ",                  "sup": "Gas Co. Ltd",   "minStock": 30, "cost": 60,  "sell": 95,  "unit": "Pcs" },
+    { "sku": "STK008", "name": "Silver Ring",       "urdu": "سلور رینگ",                 "sup": "Jewellery Sup.","minStock": 25, "cost": 150, "sell": 220, "unit": "Pcs" },
+    { "sku": "STK009", "name": "Jali Cutter",       "urdu": "جالی کٹر",                  "sup": "ABC Traders",   "minStock": 15, "cost": 80,  "sell": 120, "unit": "Pcs" },
+    { "sku": "STK010", "name": "Fitting Nut",       "urdu": "فٹنگ ناٹ",                  "sup": "ABC Traders",   "minStock": 20, "cost": 8,   "sell": 15,  "unit": "Pcs" },
+    { "sku": "STK011", "name": "Chalan Saman Moti Wala", "urdu": "چلن سامان موٹی والا", "sup": "XYZ Wholesale", "minStock": 20, "cost": 25,  "sell": 40,  "unit": "Pcs" },
+    { "sku": "STK012", "name": "Chota Packet",      "urdu": "چھوٹا پاکٹ",                "sup": "ABC Traders",   "minStock": 15, "cost": 10,  "sell": 18,  "unit": "Pcs" },
+    { "sku": "STK013", "name": "Kashkonki",         "urdu": "کشکونکے",                  "sup": "XYZ Wholesale", "minStock": 10, "cost": 55,  "sell": 85,  "unit": "Pcs" },
+    { "sku": "STK014", "name": "Push Button",       "urdu": "پوش بٹن",                   "sup": "ABC Traders",   "minStock": 25, "cost": 15,  "sell": 25,  "unit": "Pcs" },
+    { "sku": "STK015", "name": "Karki",             "urdu": "کھڑکی",                      "sup": "Local Market",  "minStock": 20, "cost": 110, "sell": 160, "unit": "Pcs" },
+    { "sku": "STK016", "name": "Upper Handle",      "urdu": "Upper ہینڈل",               "sup": "ABC Traders",   "minStock": 20, "cost": 40,  "sell": 60,  "unit": "Pcs" },
+    { "sku": "STK017", "name": "Motay Agay Wala",   "urdu": "موٹے آگے والا",             "sup": "ABC Traders",   "minStock": 20, "cost": 30,  "sell": 45,  "unit": "Pcs" },
+    { "sku": "STK018", "name": "Pipe Taiwan",       "urdu": "پائپ تھائی وان",             "sup": "Pipe Co.",      "minStock": 30, "cost": 70,  "sell": 110, "unit": "Pcs" },
+    { "sku": "STK019", "name": "Cover",             "urdu": "کاور",                      "sup": "ABC Traders",   "minStock": 20, "cost": 20,  "sell": 32,  "unit": "Pcs" },
+    { "sku": "STK020", "name": "Weight",            "urdu": "وزن",                       "sup": "ABC Traders",   "minStock": 20, "cost": 28,  "sell": 42,  "unit": "Pcs" },
+    { "sku": "STK021", "name": "Weight Spring",     "urdu": "وزن سپرنگ",                 "sup": "ABC Traders",   "minStock": 20, "cost": 35,  "sell": 50,  "unit": "Pcs" },
+    { "sku": "STK022", "name": "Pipe Kari",         "urdu": "پائپ کھڑے",                 "sup": "Pipe Co.",      "minStock": 15, "cost": 50,  "sell": 75,  "unit": "Pcs" },
+    { "sku": "STK023", "name": "Magpol Patri",      "urdu": "میک پول پٹری",              "sup": "XYZ Wholesale", "minStock": 10, "cost": 45,  "sell": 65,  "unit": "Pcs" },
+    { "sku": "STK024", "name": "Press Ring",        "urdu": "پریس رینگ",                 "sup": "ABC Traders",   "minStock": 15, "cost": 90,  "sell": 130, "unit": "Pcs" }
+  ],
+  "stock": {
+    "STK001": 10, "STK002": 25, "STK003": 35, "STK004": 20,
+    "STK005": 8,  "STK006": 6,  "STK007": 11, "STK008": 2,
+    "STK009": 70, "STK010": 23, "STK011": 99, "STK012": 65,
+    "STK013": 98, "STK014": 35, "STK015": 22, "STK016": 38,
+    "STK017": 12, "STK018": 75, "STK019": 41, "STK020": 35,
+    "STK021": 45, "STK022": 10, "STK023": 88, "STK024": 15
+  }
+}
