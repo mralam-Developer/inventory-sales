@@ -6,118 +6,147 @@
 <title>Shah Co. — Stock Inventory</title>
 <style>
   :root {
-    --navy:    #1B2A4A;
-    --navy-md: #2C3E6B;
-    --navy-dk: #0F1A30;
-    --navy-lt: #25396B;
-    --gold:    #C9A84C;
-    --gold-lt: #FFF3CD;
-    --gold-dt: #B8922E;
-    --white:   #FFFFFF;
-    --off-wht: #F5F7FC;
-    --slate:   #34495E;
-    --slate-lt:#5D6D7E;
-    --green:   #27AE60;
-    --green-bg:#D5F5E3;
-    --green-dt:#1E8449;
-    --yellow:  #F39C12;
-    --yellow-bg:#FEF9E7;
-    --yellow-dt:#B7950B;
-    --red:     #E74C3C;
-    --red-bg:  #FDEDEC;
-    --red-dt:  #C0392B;
-    --grey-bd: #D5DBDB;
-    --grey-bg: #F2F4F7;
-    --grey-lt: #EAECEE;
-    --shadow:  0 2px 8px rgba(0,0,0,0.08);
-    --shadow-lg: 0 6px 20px rgba(0,0,0,0.12);
+    --navy:      #14223B;
+    --navy-2:    #1B2D4A;
+    --navy-3:    #25396B;
+    --navy-dk:   #0D1628;
+    --gold:      #C9A84C;
+    --gold-2:    #DFC065;
+    --gold-lt:   #FFF8E5;
+    --gold-dt:   #A67C1E;
+    --white:     #FFFFFF;
+    --bg:        #F4F6FA;
+    --card-bg:   #FFFFFF;
+    --slate:     #3A4A5C;
+    --slate-2:   #5A6A7C;
+    --slate-3:   #8A9AAE;
+    --green:     #1D8A4A;
+    --green-bg:  #D4F0DE;
+    --green-dt:  #14663A;
+    --green-lt:  #E8FAF0;
+    --yellow:    #D4A017;
+    --yellow-bg: #FEF6DA;
+    --yellow-dt: #A67C1E;
+    --red:       #C0392B;
+    --red-bg:    #FDECEA;
+    --red-dt:    #962D20;
+    --red-lt:    #FDF2F2;
+    --purple:    #7D3C98;
+    --grey-bd:   #DDE2EA;
+    --grey-bg:   #F0F3F7;
+    --grey-lt:   #EAEDF2;
+    --shadow-sm: 0 1px 4px rgba(13,22,40,0.07);
+    --shadow-md: 0 3px 10px rgba(13,22,40,0.10);
+    --shadow-lg: 0 8px 28px rgba(13,22,40,0.16);
+    --shadow-xl: 0 14px 48px rgba(13,22,40,0.22);
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    background: var(--off-wht);
+    font-family: 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
     color: var(--slate);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* ═══════════════════════════════════════════════════
-     NAVY GRADIENT BRAND STRIP
+     NAVY GRADIENT STRIP WITH GOLD ACCENT
      ═══════════════════════════════════════════════════ */
   .brand-strip {
     position: relative;
-    background: linear-gradient(135deg, var(--navy-dk) 0%, var(--navy) 55%, var(--navy-md) 100%);
+    background: linear-gradient(135deg, var(--navy-dk) 0%, var(--navy) 45%, var(--navy-2) 100%);
     padding: 0;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.30);
   }
   .brand-strip::before {
     content: '';
     position: absolute;
-    top: 0; right: 0; bottom: 0;
-    width: 280px;
-    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.07));
+    top: -60%; right: -10%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
     pointer-events: none;
   }
   .brand-strip::after {
     content: '';
     position: absolute;
     left: 0; top: 0; bottom: 0;
-    width: 4px;
-    background: var(--gold);
+    width: 5px;
+    background: linear-gradient(180deg, var(--gold) 0%, var(--gold-2) 50%, var(--gold) 100%);
+    box-shadow: 0 0 12px rgba(201,168,76,0.5);
   }
   .brand-inner {
-    max-width: 1280px;
+    max-width: 1320px;
     margin: 0 auto;
-    padding: 16px 24px;
+    padding: 18px 28px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
     z-index: 1;
   }
-  .brand-logo { display: flex; align-items: center; gap: 14px; }
+  .brand-logo { display: flex; align-items: center; gap: 16px; }
   .brand-icon {
-    width: 48px; height: 48px;
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dt) 100%);
-    border-radius: 10px;
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
+    border-radius: 11px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 24px; font-weight: 900; color: var(--navy);
-    box-shadow: 0 2px 8px rgba(201,168,76,0.4);
-    letter-spacing: 1px;
+    font-size: 26px; font-weight: 900; color: var(--navy);
+    box-shadow: 0 3px 12px rgba(201,168,76,0.45);
+    letter-spacing: 1.5px;
+    position: relative;
+  }
+  .brand-icon::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 9px;
+    border: 1.5px solid rgba(255,255,255,0.3);
   }
   .brand-text { color: var(--white); }
   .brand-text h1 {
-    font-size: 20px; font-weight: 700; letter-spacing: 0.5px;
-    margin: 0; line-height: 1.2;
+    font-size: 22px; font-weight: 800; letter-spacing: 0.3px;
+    margin: 0; line-height: 1.2; color: #FFFFFF;
   }
   .brand-text .sub {
-    font-size: 12px; color: var(--gold); font-style: italic;
-    margin-top: 3px; letter-spacing: 0.3px;
+    font-size: 12px; color: var(--gold-2); font-style: italic;
+    margin-top: 4px; letter-spacing: 0.4px; font-weight: 500;
   }
   .brand-meta {
-    color: rgba(255,255,255,0.75);
+    color: rgba(255,255,255,0.72);
     font-size: 12px;
     text-align: right;
-    line-height: 1.6;
+    line-height: 1.7;
   }
   .brand-meta .loc {
-    color: var(--white); font-weight: 600; font-size: 13px;
+    color: #FFFFFF; font-weight: 700; font-size: 14px;
+    display: block; margin-bottom: 2px;
   }
-  .brand-meta .live-badge {
-    display: inline-block;
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     background: var(--green);
     color: white;
     font-size: 10px; font-weight: 700;
-    padding: 3px 8px; border-radius: 10px;
-    margin-top: 4px;
-    letter-spacing: 0.5px;
-    animation: pulse 2s infinite;
+    padding: 4px 10px; border-radius: 11px;
+    margin-top: 6px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
   }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
+  .live-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: white;
+    border-radius: 50%;
+    animation: livePulse 1.8s ease-in-out infinite;
+  }
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255,255,255,0.5); }
+    50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(255,255,255,0); }
   }
 
   /* ═══════════════════════════════════════════════════
@@ -127,93 +156,85 @@
     background: var(--navy-dk);
     display: flex;
     flex-wrap: wrap;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.20);
   }
   .kpi-item {
-    flex: 1 1 140px;
-    min-width: 120px;
-    padding: 14px 18px;
-    border-right: 1px solid rgba(255,255,255,0.06);
+    flex: 1 1 150px;
+    min-width: 125px;
+    padding: 14px 20px;
+    border-right: 1px solid rgba(255,255,255,0.05);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
+    transition: background 0.25s;
   }
+  .kpi-item:hover { background: rgba(255,255,255,0.04); }
   .kpi-item:last-child { border-right: none; }
-  .kpi-item::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 30px; height: 2px;
-    border-radius: 2px;
-  }
-  .kpi-item.gold::after   { background: var(--gold); }
-  .kpi-item.green::after  { background: var(--green); }
-  .kpi-item.yellow::after { background: var(--yellow); }
-  .kpi-item.red::after    { background: var(--red); }
-  .kpi-item.navy::after   { background: var(--gold); opacity: 0.6; }
 
   .kpi-top {
-    display: flex; align-items: center; gap: 6px;
-    margin-bottom: 4px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 7px;
+    margin-bottom: 6px;
   }
   .kpi-icon {
-    width: 28px; height: 28px;
-    border-radius: 6px;
+    width: 32px; height: 32px;
+    border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
+    font-size: 16px; font-weight: 700;
   }
-  .kpi-icon.gold  { background: rgba(201,168,76,0.15); color: var(--gold); }
-  .kpi-icon.green { background: rgba(39,174,96,0.15);  color: var(--green); }
-  .kpi-icon.yellow { background: rgba(243,156,18,0.15); color: var(--yellow); }
-  .kpi-icon.red    { background: rgba(231,76,60,0.15);  color: var(--red); }
-  .kpi-icon.navy   { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); }
+  .kpi-icon.navy  { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75); }
+  .kpi-icon.gold  { background: rgba(201,168,76,0.18);  color: var(--gold-2); }
+  .kpi-icon.green { background: rgba(29,138,74,0.18);   color: var(--green); }
+  .kpi-icon.yellow{ background: rgba(212,160,23,0.18);  color: var(--yellow); }
+  .kpi-icon.red   { background: rgba(192,57,43,0.18);   color: var(--red); }
 
   .kpi-val {
-    font-size: 26px;
-    font-weight: 800;
-    color: var(--white);
+    font-size: 27px;
+    font-weight: 900;
+    color: #FFFFFF;
     line-height: 1;
     letter-spacing: -0.5px;
+    transition: color 0.2s;
   }
-  .kpi-item.gold .kpi-val  { color: var(--gold); }
+  .kpi-item.gold  .kpi-val { color: var(--gold-2); }
   .kpi-item.green .kpi-val { color: var(--green); }
   .kpi-item.yellow .kpi-val { color: var(--yellow); }
-  .kpi-item.red .kpi-val   { color: var(--red); }
+  .kpi-item.red   .kpi-val { color: var(--red); }
 
   .kpi-lbl {
     font-size: 10px;
-    color: rgba(255,255,255,0.6);
-    margin-top: 5px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 6px;
     text-transform: uppercase;
-    letter-spacing: 0.7px;
-    font-weight: 500;
+    letter-spacing: 0.8px;
+    font-weight: 600;
   }
 
   /* ═══════════════════════════════════════════════════
      MAIN LAYOUT
      ═══════════════════════════════════════════════════ */
   .main-wrap {
-    max-width: 1280px;
+    max-width: 1320px;
     margin: 0 auto;
-    padding: 24px 24px 40px;
+    padding: 22px 28px 48px;
   }
 
   /* ── SECTION HEADERS ─────────────────────────────── */
   .sec-head {
     background: var(--navy);
     color: var(--white);
-    padding: 12px 20px;
-    border-radius: 8px;
+    padding: 13px 22px;
+    border-radius: 9px;
     margin-bottom: 18px;
     display: flex;
     align-items: center;
     gap: 12px;
     font-size: 15px;
     font-weight: 700;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.18);
     position: relative;
     overflow: hidden;
   }
@@ -222,7 +243,7 @@
     position: absolute;
     top: 0; left: 0; bottom: 0;
     width: 4px;
-    background: var(--gold);
+    background: linear-gradient(180deg, var(--gold) 0%, var(--gold-2) 100%);
   }
   .sec-head .icon { font-size: 18px; }
   .sec-head .badge {
@@ -230,104 +251,164 @@
     background: var(--gold);
     color: var(--navy);
     font-size: 11px;
-    padding: 4px 12px;
+    padding: 4px 13px;
     border-radius: 12px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.3px;
   }
 
-  /* ── TOOLBAR / FILTERS ───────────────────────────── */
+  /* ── TOOLBAR ──────────────────────────────────────── */
   .toolbar {
-    background: var(--white);
+    background: var(--card-bg);
     border: 1px solid var(--grey-bd);
-    border-radius: 8px;
-    padding: 12px 16px;
+    border-radius: 10px;
+    padding: 13px 18px;
     margin-bottom: 18px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 10px;
-    box-shadow: var(--shadow);
+    gap: 12px;
+    box-shadow: var(--shadow-sm);
   }
   .toolbar-group {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
   }
   .toolbar-label {
     font-size: 11px;
     font-weight: 700;
-    color: var(--slate-lt);
+    color: var(--slate-2);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-right: 4px;
+    letter-spacing: 0.6px;
+    margin-right: 3px;
   }
   .toolbar select, .toolbar input {
-    padding: 8px 12px;
+    padding: 8px 13px;
     border: 1px solid var(--grey-bd);
-    border-radius: 6px;
+    border-radius: 7px;
     font-size: 13px;
     background: var(--white);
     color: var(--slate);
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: inherit;
   }
+  .toolbar select { cursor: pointer; }
   .toolbar select:focus, .toolbar input:focus {
     border-color: var(--gold);
     box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
   }
-  .toolbar input::placeholder { color: #AAB7B8; }
+  .toolbar input::placeholder { color: #B0BCCC; }
 
-  .search-box { flex: 1 1 220px; min-width: 160px; position: relative; }
-  .search-box input { padding-left: 34px; }
+  .search-box { flex: 1 1 230px; min-width: 170px; position: relative; }
+  .search-box input { padding-left: 36px; }
   .search-box .search-icon {
     position: absolute;
-    left: 11px; top: 50%;
+    left: 12px; top: 50%;
     transform: translateY(-50%);
-    color: #AAB7B8;
-    font-size: 14px;
+    color: #B0BCCC;
+    font-size: 15px;
     pointer-events: none;
   }
 
-  .toolbar .toolbar-action {
-    padding: 8px 16px;
+  .toolbar .tb-btn {
+    padding: 8px 17px;
     background: var(--navy);
     color: var(--white);
     border: none;
-    border-radius: 6px;
+    border-radius: 7px;
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.15s;
+    font-family: inherit;
     white-space: nowrap;
   }
-  .toolbar .toolbar-action:hover { background: var(--navy-md); }
+  .tb-btn:hover { background: var(--navy-3); }
+  .tb-btn:active { transform: scale(0.97); }
+  .tb-btn.secondary { background: var(--grey-bg); color: var(--slate); }
+  .tb-btn.secondary:hover { background: var(--grey-lt); }
 
-  /* ── TOOLTIP / LAST UPDATED ──────────────────────── */
+  /* ── SOURCE BAR ───────────────────────────────────── */
   .source-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     font-size: 11px;
-    color: var(--slate-lt);
+    color: var(--slate-2);
     padding: 0 4px;
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .source-bar a {
     color: var(--navy);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
   }
   .source-bar a:hover { text-decoration: underline; }
-  .sync-status {
-    display: inline-flex;
+  .sync-row {
+    display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
   }
   .sync-dot {
     width: 7px; height: 7px;
     border-radius: 50%;
     background: var(--green);
+    box-shadow: 0 0 6px rgba(29,138,74,0.5);
+  }
+  .sync-dot.pending { background: var(--yellow); box-shadow: 0 0 6px rgba(212,160,23,0.5); }
+
+  /* ═══════════════════════════════════════════════════
+     SUMMARY STATS ROW
+     ═══════════════════════════════════════════════════ */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--grey-bd);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  .stat-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .stat-icon.navy  { background: var(--navy);       color: var(--white); }
+  .stat-icon.gold  { background: var(--gold);       color: var(--navy); }
+  .stat-icon.green { background: var(--green-bg);   color: var(--green); }
+  .stat-icon.yellow{ background: var(--yellow-bg);  color: var(--yellow-dt); }
+  .stat-icon.red   { background: var(--red-bg);     color: var(--red); }
+  .stat-icon.slate { background: var(--grey-bg);    color: var(--slate); }
+  .stat-body { flex: 1; }
+  .stat-value {
+    font-size: 18px; font-weight: 800; color: var(--navy);
+    line-height: 1.1;
+  }
+  .stat-value.gold { color: var(--gold-dt); }
+  .stat-value.green { color: var(--green); }
+  .stat-value.red { color: var(--red); }
+  .stat-value.yellow { color: var(--yellow-dt); }
+  .stat-label {
+    font-size: 11px; color: var(--slate-2);
+    margin-top: 3px; font-weight: 500;
   }
 
   /* ═══════════════════════════════════════════════════
@@ -335,97 +416,102 @@
      ═══════════════════════════════════════════════════ */
   .inv-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
     gap: 14px;
     margin-bottom: 40px;
   }
   .inv-card {
-    background: var(--white);
+    background: var(--card-bg);
     border: 1px solid var(--grey-bd);
-    border-radius: 10px;
-    padding: 16px;
+    border-radius: 11px;
+    padding: 17px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    gap: 11px;
+    transition: transform 0.22s cubic-bezier(0.18,0.89,0.32,1.28),
+                box-shadow 0.22s,
+                border-color 0.22s;
     position: relative;
+    cursor: pointer;
     overflow: hidden;
   }
   .inv-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--grey-bg);
+    height: 3.5px;
+    transition: background 0.3s;
   }
-  .inv-card.st-ok::before   { background: var(--green); }
-  .inv-card.st-low::before  { background: var(--yellow); }
-  .inv-card.st-out::before  { background: var(--red); }
-  .inv-card.st-check::before{ background: #E67E22; }
+  .inv-card.st-ok::before   { background: linear-gradient(90deg, var(--green) 0%, var(--green) 100%); }
+  .inv-card.st-low::before  { background: linear-gradient(90deg, var(--yellow) 0%, var(--yellow) 100%); }
+  .inv-card.st-out::before  { background: linear-gradient(90deg, var(--red) 0%, var(--red) 100%); }
+  .inv-card.st-check::before{ background: linear-gradient(90deg, #E67E22 0%, #E67E22 100%); }
 
   .inv-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-3px) scale(1.012);
     box-shadow: var(--shadow-lg);
     border-color: var(--gold);
   }
+  .inv-card:active { transform: translateY(-1px) scale(0.998); }
 
   .inv-card .card-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
+    gap: 10px;
   }
   .inv-card .sku-box {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
   }
   .inv-card .sku-icon {
-    width: 22px; height: 22px;
+    width: 24px; height: 24px;
     background: var(--navy);
-    border-radius: 4px;
+    border-radius: 5px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 9px; font-weight: 700; color: var(--white);
+    font-size: 10px; font-weight: 800; color: var(--white);
     flex-shrink: 0;
+    letter-spacing: 0.5px;
   }
   .inv-card .sku {
-    font-size: 10px; font-weight: 700; color: var(--gold);
-    background: var(--gold-lt); padding: 3px 7px; border-radius: 3px;
+    font-size: 10px; font-weight: 700; color: var(--gold-dt);
+    background: var(--gold-lt); padding: 3px 8px; border-radius: 4px;
     letter-spacing: 0.5px;
   }
   .inv-card .status-badge {
     font-size: 10px; font-weight: 700;
-    padding: 4px 10px; border-radius: 12px;
+    padding: 4px 11px; border-radius: 12px;
     text-transform: uppercase; letter-spacing: 0.5px;
-    display: flex; align-items: center; gap: 4px;
+    display: flex; align-items: center; gap: 5px;
   }
   .status-badge .status-dot {
     width: 5px; height: 5px; border-radius: 50%;
   }
-  .st-ok .status-badge   { background: var(--green-bg);  color: #1E8449; }
+  .st-ok .status-badge   { background: var(--green-bg);  color: var(--green-dt); }
   .st-ok .status-dot     { background: var(--green); }
-  .st-low .status-badge  { background: var(--yellow-bg); color: #B7950B; }
+  .st-low .status-badge  { background: var(--yellow-bg); color: var(--yellow-dt); }
   .st-low .status-dot    { background: var(--yellow); }
-  .st-out .status-badge  { background: var(--red-bg);    color: #C0392B; }
+  .st-out .status-badge  { background: var(--red-bg);    color: var(--red-dt); }
   .st-out .status-dot    { background: var(--red); }
-  .st-check .status-badge{ background: #FDEBD0;         color: #B45F06; }
+  .st-check .status-badge{ background: #FDF2E9;         color: #B45F06; }
   .st-check .status-dot  { background: #E67E22; }
 
   .inv-card .item-name {
-    font-size: 15px; font-weight: 700; color: var(--navy);
+    font-size: 16px; font-weight: 700; color: var(--navy);
     line-height: 1.35;
   }
   .inv-card .item-urdu {
-    font-size: 12px; color: var(--slate-lt); font-style: italic;
-    direction: rtl; text-align: right; margin-top: -2px;
-    line-height: 1.4;
+    font-size: 12px; color: var(--slate-2); font-style: italic;
+    direction: rtl; text-align: right; margin-top: -3px;
+    line-height: 1.45;
   }
   .inv-card .supplier-row {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     font-size: 11px;
-    color: var(--slate-lt);
+    color: var(--slate-2);
     margin-top: 2px;
   }
   .supplier-tag {
@@ -433,197 +519,268 @@
     background: var(--grey-bg);
     color: var(--slate);
     font-size: 10px; font-weight: 600;
-    padding: 2px 7px; border-radius: 3px;
+    padding: 2px 8px; border-radius: 4px;
   }
 
   .inv-card .stats-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 7px;
-    margin-top: 6px;
+    gap: 8px;
+    margin-top: 7px;
   }
   .stat-box {
     background: var(--grey-bg);
-    border-radius: 7px;
-    padding: 8px 7px;
+    border-radius: 8px;
+    padding: 9px 8px;
     text-align: center;
-    transition: background 0.2s;
+    transition: background 0.25s, transform 0.2s;
   }
   .stat-box .stat-num {
-    font-size: 17px; font-weight: 800; color: var(--navy);
+    font-size: 18px; font-weight: 800; color: var(--navy);
     line-height: 1.2;
   }
   .stat-box .stat-lbl {
-    font-size: 9px; color: var(--slate-lt); opacity: 0.8;
+    font-size: 9px; color: var(--slate-2); opacity: 0.85;
     text-transform: uppercase; letter-spacing: 0.4px;
-    margin-top: 3px; font-weight: 600;
+    margin-top: 4px; font-weight: 600;
   }
-  .stat-box.highlight .stat-num { color: var(--gold); }
-  .stat-box.danger .stat-num    { color: var(--red); }
+  .stat-box.highlight .stat-num { color: var(--gold-dt); }
+  .stat-box.highlight { background: var(--gold-lt); }
+  .stat-box.danger .stat-num    { color: var(--red-dt); }
+  .stat-box.danger { background: var(--red-lt); }
+  .stat-box.safe .stat-num      { color: var(--green); }
+  .stat-box.safe { background: var(--green-lt); }
 
   .inv-card .bottom-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 4px;
-    padding-top: 10px;
+    margin-top: 5px;
+    padding-top: 11px;
     border-top: 1px dashed var(--grey-bd);
   }
   .price-info {
-    font-size: 12px; color: var(--slate-lt);
+    font-size: 12px; color: var(--slate-2);
   }
   .price-info strong {
     color: var(--navy); font-size: 14px; font-weight: 700;
   }
-  .price-info .selling {
-    color: var(--green); font-weight: 700;
-  }
+  .price-info .selling { color: var(--green); font-weight: 700; }
+  .price-info .cost { color: var(--slate-2); }
+
   .stock-bar-wrap {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
   }
   .stock-bar {
-    width: 52px; height: 6px;
+    width: 56px; height: 7px;
     background: var(--grey-bg);
-    border-radius: 4px;
+    border-radius: 5px;
     overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.06);
   }
   .stock-bar-fill {
     height: 100%;
-    border-radius: 4px;
-    transition: width 0.6s ease, background 0.3s;
+    border-radius: 5px;
+    transition: width 0.7s cubic-bezier(0.25,0.46,0.45,0.94),
+                background 0.3s;
   }
-  .stock-bar-fill.full    { background: var(--green); }
-  .stock-bar-fill.medium  { background: var(--yellow); }
-  .stock-bar-fill.low     { background: var(--red); }
+  .stock-bar-fill.full      { background: var(--green); }
+  .stock-bar-fill.medium    { background: linear-gradient(90deg, var(--green), var(--yellow)); }
+  .stock-bar-fill.low       { background: linear-gradient(90deg, var(--yellow), var(--red)); }
+  .stock-bar-fill.critical  { background: var(--red); }
   .stock-pct {
-    font-size: 11px; font-weight: 700; color: var(--slate-lt);
-    min-width: 28px;
+    font-size: 11px; font-weight: 700; color: var(--slate-2);
+    min-width: 30px;
   }
-  .stock-pct.low   { color: var(--red); }
-  .stock-pct.medium { color: var(--yellow); }
+  .stock-pct.low   { color: var(--red-dt); }
+  .stock-pct.medium { color: var(--yellow-dt); }
 
-  /* ── LOW STOCK ALERT BANNER ──────────────────────── */
-  .alert-banner {
-    background: linear-gradient(90deg, var(--red-bg) 0%, #FDF2F2 100%);
-    border: 1px solid #F5B7B1;
-    border-left: 4px solid var(--red);
-    border-radius: 8px;
-    padding: 12px 18px;
-    margin-bottom: 18px;
-    display: flex;
+  /* ═══════════════════════════════════════════════════
+     ITEM DETAIL MODAL
+     ═══════════════════════════════════════════════════ */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(13,22,40,0.65);
+    z-index: 1000;
     align-items: center;
-    gap: 12px;
-    font-size: 13px;
-    color: #922B21;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(3px);
   }
-  .alert-banner .alert-icon {
-    font-size: 22px;
-    flex-shrink: 0;
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--card-bg);
+    border-radius: 14px;
+    max-width: 520px;
+    width: 100%;
+    padding: 28px;
+    box-shadow: var(--shadow-xl);
+    position: relative;
+    animation: modalIn 0.25s ease-out;
   }
-  .alert-banner .alert-text strong { color: var(--red-dt); }
-  .alert-banner .alert-link {
-    color: var(--navy);
-    font-weight: 700;
-    text-decoration: none;
-    margin-left: 8px;
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.92) translateY(12px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
   }
+  .modal-close {
+    position: absolute;
+    top: 14px; right: 16px;
+    width: 32px; height: 32px;
+    background: var(--grey-bg);
+    border: none;
+    border-radius: 8px;
+    font-size: 18px; color: var(--slate-2);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .modal-close:hover { background: var(--grey-lt); }
+  .modal .modal-sku {
+    font-size: 11px; font-weight: 700; color: var(--gold-dt);
+    background: var(--gold-lt); padding: 4px 10px; border-radius: 4px;
+    display: inline-block; letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .modal .modal-name {
+    font-size: 22px; font-weight: 800; color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .modal .modal-urdu {
+    font-size: 14px; color: var(--slate-2); font-style: italic;
+    direction: rtl; text-align: right; margin-bottom: 14px;
+  }
+  .modal .modal-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px; font-weight: 700;
+    padding: 4px 11px; border-radius: 12px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin-bottom: 16px;
+  }
+  .modal .modal-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .modal .ms-box {
+    background: var(--grey-bg);
+    border-radius: 9px;
+    padding: 12px;
+    text-align: center;
+  }
+  .modal .ms-num {
+    font-size: 22px; font-weight: 800; color: var(--navy);
+    line-height: 1.2;
+  }
+  .modal .ms-lbl {
+    font-size: 10px; color: var(--slate-2);
+    margin-top: 4px; text-transform: uppercase;
+    letter-spacing: 0.5px; font-weight: 600;
+  }
+  .modal .ms-box.highlight .ms-num { color: var(--gold-dt); }
+  .modal .ms-box.danger .ms-num  { color: var(--red-dt); }
+  .modal .modal-section {
+    font-size: 11px; font-weight: 700; color: var(--slate-2);
+    text-transform: uppercase; letter-spacing: 0.6px;
+    margin-bottom: 8px;
+  }
+  .modal .modal-detail {
+    font-size: 14px; color: var(--slate);
+    margin-bottom: 12px;
+  }
+  .modal .modal-detail strong { color: var(--navy); }
 
-  /* ── EMPTY STATE ──────────────────────────────────── */
+  /* ═══════════════════════════════════════════════════
+     EMPTY STATE
+     ═══════════════════════════════════════════════════ */
   .empty-msg {
     grid-column: 1 / -1;
     text-align: center;
     padding: 50px 20px;
-    color: var(--slate-lt);
-    opacity: 0.65;
+    color: var(--slate-2);
+    opacity: 0.7;
     font-style: italic;
     font-size: 14px;
-    background: var(--white);
+    background: var(--card-bg);
     border: 1px dashed var(--grey-bd);
-    border-radius: 10px;
+    border-radius: 11px;
   }
 
-  /* ── FOOTER ───────────────────────────────────────── */
+  /* ═══════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════ */
   .foot {
     text-align: center;
-    padding: 20px;
-    color: var(--slate-lt);
-    opacity: 0.5;
+    padding: 18px 28px 30px;
+    color: var(--slate-3);
     font-size: 11px;
+    line-height: 1.7;
     border-top: 1px solid var(--grey-bd);
-    margin-top: 20px;
-    line-height: 1.6;
+    margin-top: 10px;
   }
   .foot a {
     color: var(--navy);
     text-decoration: none;
     font-weight: 600;
   }
+  .foot a:hover { text-decoration: underline; }
 
-  /* ── LOADING OVERLAY ─────────────────────────────── */
-  .loading-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(27,42,74,0.7);
-    z-index: 999;
-    align-items: center;
-    justify-content: center;
-  }
-  .loading-overlay.active { display: flex; }
-  .loading-card {
-    background: var(--white);
-    border-radius: 12px;
-    padding: 30px 40px;
-    text-align: center;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    max-width: 340px;
-  }
-  .loading-spinner {
-    width: 44px; height: 44px;
-    border: 4px solid var(--grey-bg);
-    border-top-color: var(--gold);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin: 0 auto 14px;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .loading-card p {
-    font-size: 13px; color: var(--slate-lt);
-    margin-top: 6px;
-  }
-  .loading-card .loading-title {
-    font-size: 15px; font-weight: 700; color: var(--navy);
-    margin-bottom: 4px;
+  /* ═══════════════════════════════════════════════════
+     PRINT STYLES
+     ═══════════════════════════════════════════════════ */
+  @media print {
+    .brand-strip { box-shadow: none; }
+    .toolbar { display: none; }
+    .source-bar { display: none; }
+    .inv-card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    .kpi-bar { box-shadow: none; }
+    body { background: white; }
+    .foot { display: none; }
+    .sec-head { box-shadow: none; }
+    .stats-row { display: none; }
   }
 
-  /* ── RESPONSIVE ───────────────────────────────────── */
+  /* ═══════════════════════════════════════════════════
+     RESPONSIVE
+     ═══════════════════════════════════════════════════ */
   @media (max-width: 768px) {
     .brand-inner { flex-direction: column; gap: 10px; text-align: center; }
     .brand-meta { text-align: center; }
     .stats-row { grid-template-columns: 1fr 1fr; }
     .kpi-item { flex: 1 1 100px; min-width: 90px; padding: 10px 12px; }
-    .kpi-val { font-size: 20px; }
+    .kpi-val { font-size: 21px; }
     .inv-grid { grid-template-columns: 1fr; }
-    .main-wrap { padding: 16px 14px 30px; }
+    .main-wrap { padding: 16px 14px 36px; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .modal { padding: 20px; max-width: 100%; margin: 10px; }
   }
   @media (max-width: 480px) {
-    .stats-row { grid-template-columns: 1fr 1fr; }
+    .stats-row { grid-template-columns: 1fr; }
     .toolbar { flex-direction: column; align-items: stretch; }
     .toolbar-group { flex-wrap: wrap; }
     .search-box { flex: 1 1 auto; }
+    .kpi-bar { flex-direction: row; }
+    .kpi-item { flex: 1 1 80px; min-width: 70px; padding: 8px 10px; }
+    .kpi-val { font-size: 18px; }
+    .brand-inner { padding: 14px 16px; }
   }
 </style>
 </head>
 <body>
 
 <!-- ═══════════════════ LOADING OVERLAY ═══════════════ -->
-<div class="loading-overlay" id="loading">
-  <div class="loading-card">
-    <div class="loading-spinner"></div>
-    <div class="loading-title">Loading Inventory…</div>
-    <p>Fetching latest data from Google Sheets</p>
+<div class="modal-overlay" id="loading-overlay">
+  <div class="modal" style="text-align:center;">
+    <div style="width:52px;height:52px;border:4px solid var(--grey-bg);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px;"></div>
+    <div style="font-size:17px;font-weight:800;color:var(--navy);margin-bottom:6px;">Loading Inventory…</div>
+    <div style="font-size:13px;color:var(--slate-2);">Fetching latest data from Google Sheets</div>
+    <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
   </div>
 </div>
 
@@ -638,10 +795,10 @@
       </div>
     </div>
     <div class="brand-meta">
-      <div class="loc">Peshawar, Khyber Pakhtunkhwa</div>
+      <span class="loc">Peshawar, Khyber Pakhtunkhwa</span>
       <div>
-        <span class="live-badge">● LIVE DATA</span>
-        <div style="margin-top:4px;font-size:10px;opacity:0.6;">Synced from Google Sheets</div>
+        <span class="live-badge">Live Data</span>
+        <div style="margin-top:5px;font-size:10px;opacity:0.6;">Synced from Google Sheets</div>
       </div>
     </div>
   </div>
@@ -650,37 +807,27 @@
 <!-- ═══════════════════ KPI BAR ═══════════════════════ -->
 <div class="kpi-bar" id="kpi-bar">
   <div class="kpi-item navy">
-    <div class="kpi-top">
-      <div class="kpi-icon navy">📦</div>
-    </div>
+    <div class="kpi-top"><div class="kpi-icon navy">📦</div></div>
     <div class="kpi-val" id="kpi-total">—</div>
     <div class="kpi-lbl">Total Items</div>
   </div>
   <div class="kpi-item green">
-    <div class="kpi-top">
-      <div class="kpi-icon green">✓</div>
-    </div>
+    <div class="kpi-top"><div class="kpi-icon green">✓</div></div>
     <div class="kpi-val" id="kpi-instock">—</div>
     <div class="kpi-lbl">In Stock</div>
   </div>
   <div class="kpi-item yellow">
-    <div class="kpi-top">
-      <div class="kpi-icon yellow">⚠</div>
-    </div>
+    <div class="kpi-top"><div class="kpi-icon yellow">⚠</div></div>
     <div class="kpi-val" id="kpi-low">—</div>
     <div class="kpi-lbl">Low Stock</div>
   </div>
   <div class="kpi-item red">
-    <div class="kpi-top">
-      <div class="kpi-icon red">✕</div>
-    </div>
+    <div class="kpi-top"><div class="kpi-icon red">✕</div></div>
     <div class="kpi-val" id="kpi-out">—</div>
     <div class="kpi-lbl">Out of Stock</div>
   </div>
   <div class="kpi-item gold">
-    <div class="kpi-top">
-      <div class="kpi-icon gold">Rs</div>
-    </div>
+    <div class="kpi-top"><div class="kpi-icon gold">Rs</div></div>
     <div class="kpi-val" id="kpi-value">Rs 0</div>
     <div class="kpi-lbl">Total Stock Value</div>
   </div>
@@ -688,18 +835,47 @@
 
 <div class="main-wrap">
 
+  <!-- ═══════════════════ SUMMARY STATS ══════════════ -->
+  <div class="stats-row" id="stats-row"></div>
+
   <!-- ═══════════════════ ALERT BANNER ═══════════════ -->
-  <div id="alert-banner" style="display:none;" class="alert-banner">
+  <div id="alert-banner" style="display:none;">
+    <style>
+      .alert-banner {
+        background: linear-gradient(90deg, var(--red-lt) 0%, #FFF5F5 100%);
+        border: 1px solid #F5B7B1;
+        border-left: 4px solid var(--red);
+        border-radius: 9px;
+        padding: 13px 18px;
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 13px;
+        color: var(--red-dt);
+        box-shadow: var(--shadow-sm);
+      }
+      .alert-banner .alert-icon { font-size: 22px; flex-shrink: 0; }
+      .alert-banner .alert-text strong { color: var(--red); }
+      .alert-banner .alert-link {
+        color: var(--navy);
+        font-weight: 700;
+        text-decoration: none;
+        margin-left: 6px;
+      }
+      .alert-banner .alert-link:hover { text-decoration: underline; }
+      @media(max-width:480px){.alert-banner{flex-direction:column;align-items:flex-start;}}
+    </style>
     <div class="alert-icon">🚨</div>
     <div class="alert-text">
       <strong>Low Stock Alert:</strong>
       <span id="alert-text-body"></span>
-      <a class="alert-link" href="#low-stock-section">Review low stock items →</a>
+      <a class="alert-link" href="#inventory-section" onclick="document.getElementById('filter-status').value='Low';updateFilters();return false;">Review low stock →</a>
     </div>
   </div>
 
   <!-- ═══════════════════ INVENTORY ══════════════════ -->
-  <div class="sec-head">
+  <div class="sec-head" id="inventory-section">
     <span class="icon">📦</span> Stock Inventory
     <span class="badge" id="item-count-badge">24 items</span>
   </div>
@@ -715,35 +891,39 @@
         <option value="Out of stock">🔴 Out of Stock</option>
       </select>
     </div>
-
     <div class="toolbar-group">
       <span class="toolbar-label">Supplier</span>
       <select id="filter-supplier">
         <option value="all">All Suppliers</option>
       </select>
     </div>
-
     <div class="search-box">
       <span class="search-icon">🔍</span>
-      <input type="text" id="search-box"
-             placeholder="Search by name, SKU, Urdu, or supplier…"
+      <input type="text" id="search-box" placeholder="Search by name, SKU, Urdu, or supplier…"
              autocomplete="off" />
     </div>
-
-    <button class="toolbar-action" id="btn-refresh" title="Refresh data from Google Sheets">
-      🔄 Refresh
-    </button>
+    <div class="toolbar-group">
+      <span class="toolbar-label">Sort</span>
+      <select id="sort-by">
+        <option value="sku">By SKU</option>
+        <option value="name">By Name</option>
+        <option value="stock">By Stock (High→Low)</option>
+        <option value="value">By Value (High→Low)</option>
+      </select>
+    </div>
+    <button class="tb-btn secondary" id="btn-print" title="Print this inventory">🖨️ Print</button>
+    <button class="tb-btn" id="btn-refresh" title="Refresh from Google Sheets">🔄 Refresh</button>
   </div>
 
   <!-- ── SOURCE BAR ─────────────────────────────────── -->
   <div class="source-bar">
-    <div class="sync-status">
-      <span class="sync-dot"></span>
-      <span>Data sourced from:</span>
+    <div class="sync-row">
+      <span class="sync-dot" id="sync-dot"></span>
+      <span>Data from:</span>
       <a id="gsheet-link" href="" target="_blank">Google Sheets</a>
-      <span id="last-updated" style="margin-left:6px;opacity:0.7;"></span>
+      <span id="last-updated" style="margin-left:6px;color:var(--slate-3);"></span>
     </div>
-    <div style="opacity:0.6;">
+    <div style="color:var(--slate-3);">
       <span id="showing-count">Showing 24 of 24 items</span>
     </div>
   </div>
@@ -755,20 +935,34 @@
 
 <div class="foot">
   Shah Co. · Stock Inventory System · Peshawar, Khyber Pakhtunkhwa<br>
-  Data automatically synced from <a href="https://docs.google.com/spreadsheets/d/1f-BisiOUufklx2av8D_3NMHqjNugPo_Xg8W4bDmXP4E/edit" target="_blank">Stock Inventory — Store</a>
+  Data automatically synced from
+  <a href="https://docs.google.com/spreadsheets/d/1f-BisiOUufklx2av8D_3NMHqjNugPo_Xg8W4bDmXP4E/edit" target="_blank">
+    Stock Inventory — Store
+  </a>
+  <br>
+  Edit the Google Sheet to update this website instantly.
+</div>
+
+<!-- ═══════════════════ ITEM DETAIL MODAL ═════════════ -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div id="modal-body"></div>
+  </div>
 </div>
 
 <script>
 /* ═══════════════════════════════════════════════════════
-   GOOGLE SHEETS PUBLISHED CSV URL
-   The website reads inventory data from this URL.
-   To update data: edit the Google Sheet → changes appear here.
+   GOOGLE SHEETS CSV URL
+   Edit the Google Sheet → website updates automatically.
    ═══════════════════════════════════════════════════════ */
 const SHEET_CSV_URL =
   'https://docs.google.com/spreadsheets/d/1f-BisiOUufklx2av8D_3NMHqjNugPo_Xg8W4bDmXP4E/' +
   'gviz/tq?tqx=out:csv&sheet=Stock'
 
-// ── FALLBACK DATA (used if Google Sheets is unreachable) ──
+/* ═══════════════════════════════════════════════════════
+   FALLBACK DATA (if Google Sheets is unreachable)
+   ═══════════════════════════════════════════════════════ */
 const FALLBACK_ITEMS = [
   { sku:"STK001", name:"Upper Body",        urdu:"Upper باڈی",              sup:"ABC Traders",   minStock:30, cost:35,  sell:55  },
   { sku:"STK002", name:"Cat",               urdu:"کیٹ",                       sup:"XYZ Wholesale", minStock:30, cost:20,  sell:35  },
@@ -805,231 +999,232 @@ const FALLBACK_STOCK = {
 };
 
 /* ═══════════════════════════════════════════════════════
-   FETCH DATA FROM GOOGLE SHEETS (CSV)
+   STATE
    ═══════════════════════════════════════════════════════ */
-let currentData = [];
+let currentData = { items: [], stock: {} };
+let dataSource  = 'fallback'; // 'google' or 'fallback'
+
+/* ═══════════════════════════════════════════════════════
+   PARSE CSV FROM GOOGLE SHEETS
+   ═══════════════════════════════════════════════════════ */
+function parseCSV(text) {
+  const rows = [];
+  let cur = '';
+  let inQ = false;
+  let row = [];
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i], nx = text[i+1];
+    if (inQ) {
+      if (ch === '"' && nx === '"') { cur += '"'; i++; }
+      else if (ch === '"') inQ = false;
+      else cur += ch;
+    } else {
+      if (ch === '"') inQ = true;
+      else if (ch === ',') { row.push(cur); cur = ''; }
+      else if (ch === '\n') { row.push(cur); rows.push(row); row=[]; cur=''; }
+      else if (ch === '\r' && nx === '\n') { i++; row.push(cur); rows.push(row); row=[]; cur=''; }
+      else if (ch === '\r') { row.push(cur); rows.push(row); row=[]; cur=''; }
+      else cur += ch;
+    }
+  }
+  if (cur || row.length) { row.push(cur); rows.push(row); }
+  if (rows.length && rows[0][0] && rows[0][0].startsWith('\uFEFF')) rows[0][0] = rows[0][0].slice(1);
+  return rows;
+}
+
+function parseNum(v) {
+  if (v === undefined || v === null || v === '') return 0;
+  const n = parseFloat(String(v).replace(/,/g,''));
+  return isNaN(n) ? 0 : n;
+}
 
 async function fetchFromGoogleSheets() {
   try {
-    const response = await fetch(SHEET_CSV_URL);
-    if (!response.ok) throw new Error('HTTP ' + response.status);
-    const text = await response.text();
-
-    // Parse CSV
+    const res = await fetch(SHEET_CSV_URL);
+    if (!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
     const rows = parseCSV(text);
-    // rows[0] is header, rows[1..] are data
-    if (rows.length < 2) throw new Error('No data rows found');
+    if (rows.length < 2) throw new Error('No data');
 
-    const items = [];
-    const stock  = {};
-
+    const items = [], stock = {};
     for (let i = 1; i < rows.length; i++) {
-      const row = rows[i];
-      if (!row || !row[0]) continue; // skip empty rows
-
-      const sku  = (row[0]  || '').trim();   // A: Item Code
-      const name = (row[1]  || '').trim();   // B: Item Name
-      const urdu = (row[2]  || '').trim();   // C: Urdu Name
-      const unit = (row[3]  || '').trim();   // D: Unit
-      const open = parseNum(row[4]);          // E: Opening Stock
-      // F: Stock In  (formula - not readable from CSV)
-      // G: Stock Out (formula - not readable from CSV)
-      const curr = parseNum(row[7]);          // H: Current Stock (formula result)
-      const min  = parseNum(row[8]);          // I: Minimum Stock
-      const cost = parseNum(row[9]);          // J: Cost Price
-      // K: Selling Price - may be formula, try parsing
-      const sell = parseNum(row[10]) || 0;    // K: Selling Price
-      const sup  = (row[11] || '').trim();    // L: Supplier
-      // M: Status (formula)
-      // N: Reorder Qty (formula)
+      const r = rows[i]; if (!r || !r[0]) continue;
+      const sku  = (r[0]  || '').trim();
+      const name = (r[1]  || '').trim();
+      const urdu = (r[2]  || '').trim();
+      const sup  = (r[11] || '').trim();
+      const open = parseNum(r[4]);
+      const curr = parseNum(r[7]);
+      const min  = parseNum(r[8]);
+      const cost = parseNum(r[9]);
+      const sell = parseNum(r[10]) || 0;
 
       if (!sku) continue;
-
-      items.push({
-        sku, name, urdu: urdu || name, sup: sup || '—',
-        minStock: min || 0,
-        cost: cost || 0,
-        sell: sell || 0,
-        unit: unit || 'Pcs'
-      });
-
-      // Current stock: use formula result if available, else opening stock
+      items.push({ sku, name, urdu: urdu || name, sup: sup || '—',
+                   minStock: min||0, cost: cost||0, sell: sell||0, unit:'Pcs' });
       stock[sku] = (curr && curr > 0) ? curr : open;
     }
-
-    return { items, stock };
-
-  } catch (err) {
-    console.warn('Google Sheets fetch failed, using fallback:', err.message);
+    return items.length ? { items, stock } : null;
+  } catch(e) {
+    console.warn('GS fetch failed:', e.message);
     return null;
   }
 }
 
-function parseCSV(text) {
-  const rows = [];
-  let current = '';
-  let inQuotes = false;
-  let row = [];
-
-  for (let i = 0; i < text.length; i++) {
-    const ch = text[i];
-    const next = text[i + 1];
-
-    if (inQuotes) {
-      if (ch === '"' && next === '"') {
-        current += '"';
-        i++; // skip next quote
-      } else if (ch === '"') {
-        inQuotes = false;
-      } else {
-        current += ch;
-      }
-    } else {
-      if (ch === '"') {
-        inQuotes = true;
-      } else if (ch === ',') {
-        row.push(current);
-        current = '';
-      } else if (ch === '\n' || (ch === '\r' && next === '\n')) {
-        if (ch === '\r') i++;
-        row.push(current);
-        rows.push(row);
-        row = [];
-        current = '';
-      } else if (ch === '\r') {
-        row.push(current);
-        rows.push(row);
-        row = [];
-        current = '';
-      } else {
-        current += ch;
-      }
-    }
-  }
-  // last row
-  if (current || row.length > 0) {
-    row.push(current);
-    rows.push(row);
-  }
-
-  // Clean BOM and header row estimation
-  if (rows.length > 0 && rows[0][0] && rows[0][0].startsWith('\uFEFF')) {
-    rows[0][0] = rows[0][0].slice(1);
-  }
-
-  // Google CSV may include a header row like "Day,Mon,Tue..."
-  // or the sheet data starts with headers. We detect by checking
-  // if first row looks like headers (contains "Item Code" or similar)
-  return rows;
-}
-
-function parseNum(val) {
-  if (val === undefined || val === null || val === '') return 0;
-  const n = parseFloat(String(val).replace(/,/g, ''));
-  return isNaN(n) ? 0 : n;
-}
-
 /* ═══════════════════════════════════════════════════════
-   COMPUTED STATE
+   COMPUTED
    ═══════════════════════════════════════════════════════ */
-function getStatus(item, stockVal) {
-  const s = stockVal ?? 0;
-  if (s < 0)       return 'Check entries';
-  if (s === 0)     return 'Out of stock';
+function getStatus(item, s) {
+  if (s < 0) return 'Check entries';
+  if (s === 0) return 'Out of stock';
   if (s <= item.minStock) return 'Low';
   return 'OK';
 }
-
-function statusClass(st) {
-  if (st === 'OK')           return 'st-ok';
-  if (st === 'Low')          return 'st-low';
-  if (st === 'Out of stock') return 'st-out';
+function sc(st) {
+  if (st==='OK') return 'st-ok';
+  if (st==='Low') return 'st-low';
+  if (st==='Out of stock') return 'st-out';
   return 'st-check';
 }
-
-function fmtRs(n) {
-  return 'Rs ' + Number(n).toLocaleString('en-PK');
+function fmtRs(n){ return 'Rs '+Number(n).toLocaleString('en-PK'); }
+function stockPct(item, s){
+  const max = Math.max(item.minStock*5, 100);
+  return Math.min(100, Math.max(0, Math.round(((s??0)/max)*100)));
 }
-
-function stockPercent(item, stockVal) {
-  const max = Math.max(item.minStock * 5, 100);
-  return Math.min(100, Math.max(0, Math.round(((stockVal ?? 0) / max) * 100)));
+function barClass(pct){
+  if (pct <= 15) return 'critical';
+  if (pct <= 40) return 'low';
+  if (pct <= 70) return 'medium';
+  return 'full';
 }
 
 /* ═══════════════════════════════════════════════════════
    RENDER
    ═══════════════════════════════════════════════════════ */
-function render() {
-  const grid      = document.getElementById('inv-grid');
-  const filter    = getFilter();
-  const items     = currentData.items;
-  const stock     = currentData.stock;
+let currentFilter = { status:'all', supplier:'all', query:'', sort:'sku' };
 
-  // Build enriched items with computed stock + status
-  const enriched = items.map(i => ({
-    ...i,
-    currentStock: stock[i.sku] ?? 0,
-    status: getStatus(i, stock[i.sku] ?? 0)
-  }));
+function enrichedItems(){
+  return currentData.items.map(i => {
+    const s = currentData.stock[i.sku] ?? 0;
+    return { ...i, currentStock:s, status:getStatus(i,s), stockValue:s*i.sell };
+  });
+}
 
-  const visible = enriched.filter(i => {
-    if (filter.status !== 'all' && i.status !== filter.status) return false;
-    if (filter.supplier !== 'all' && i.sup !== filter.supplier) return false;
-    const q = (filter.query || '').toLowerCase();
-    if (q) {
-      const haystack = (i.sku + ' ' + i.name + ' ' + i.urdu + ' ' + i.sup).toLowerCase();
-      if (!haystack.includes(q)) return false;
+function filteredAndSorted(){
+  let list = enrichedItems();
+  const f = currentFilter;
+  list = list.filter(i => {
+    if (f.status !== 'all' && i.status !== f.status) return false;
+    if (f.supplier !== 'all' && i.sup !== f.supplier) return false;
+    if (f.query) {
+      const h = (i.sku+' '+i.name+' '+i.urdu+' '+i.sup+' '+i.unit).toLowerCase();
+      if (!h.includes(f.query.toLowerCase())) return false;
     }
     return true;
   });
+  const sortMap = {
+    sku:   (a,b) => a.sku.localeCompare(b.sku),
+    name:  (a,b) => a.name.localeCompare(b.name),
+    stock: (a,b) => b.currentStock - a.currentStock,
+    value: (a,b) => b.stockValue - a.stockValue,
+  };
+  list.sort(sortMap[currentFilter.sort] || sortMap.sku);
+  return list;
+}
+
+function render(){
+  const grid   = document.getElementById('inv-grid');
+  const list   = filteredAndSorted();
+  const all    = enrichedItems();
 
   // KPIs
-  const total    = enriched.length;
-  const instock  = enriched.filter(i => i.status === 'OK').length;
-  const low      = enriched.filter(i => i.status === 'Low').length;
-  const out      = enriched.filter(i => i.status === 'Out of stock').length;
-  const totalVal = enriched.reduce((sum, i) => sum + (i.currentStock * i.sell), 0);
+  const total   = all.length;
+  const instock = all.filter(i=>i.status==='OK').length;
+  const low     = all.filter(i=>i.status==='Low').length;
+  const out     = all.filter(i=>i.status==='Out of stock').length;
+  const totalVal= all.reduce((s,i)=>s+(i.currentStock*i.sell),0);
 
-  document.getElementById('kpi-total').textContent    = total;
-  document.getElementById('kpi-instock').textContent  = instock;
-  document.getElementById('kpi-low').textContent      = low;
-  document.getElementById('kpi-out').textContent      = out;
-  document.getElementById('kpi-value').textContent    = fmtRs(totalVal);
-  document.getElementById('item-count-badge').textContent = total + ' item' + (total !== 1 ? 's' : '');
-  document.getElementById('showing-count').textContent   = 'Showing ' + visible.length + ' of ' + total + ' items';
+  document.getElementById('kpi-total').textContent   = total;
+  document.getElementById('kpi-instock').textContent = instock;
+  document.getElementById('kpi-low').textContent     = low;
+  document.getElementById('kpi-out').textContent     = out;
+  document.getElementById('kpi-value').textContent   = fmtRs(totalVal);
+  document.getElementById('item-count-badge').textContent = total+' item'+(total!==1?'s':'');
+  document.getElementById('showing-count').textContent   = 'Showing '+list.length+' of '+total+' items';
 
-  // Alert banner for low stock
-  const alertBanner = document.getElementById('alert-banner');
-  const alertBody   = document.getElementById('alert-text-body');
+  // Alert banner
+  const ab = document.getElementById('alert-banner');
+  const at = document.getElementById('alert-text-body');
   if (low > 0) {
-    const lowItems = enriched.filter(i => i.status === 'Low');
-    alertBody.textContent = lowItems.map(i =>
-      i.name + ' (' + i.sku + '): ' + i.currentStock + ' pcs remaining'
-    ).join(', ') + '. ' + (low > 1 ? 'Time to reorder.' : 'Time to reorder.');
-    alertBanner.style.display = 'flex';
+    const li = all.filter(i=>i.status==='Low');
+    at.textContent = li.map(i=>i.name+' ('+i.sku+'): '+i.currentStock+' pcs left').join(' · ');
+    ab.style.display = 'flex';
   } else {
-    alertBanner.style.display = 'none';
+    ab.style.display = 'none';
   }
 
-  // Render cards
-  if (visible.length === 0) {
-    grid.innerHTML = '<div class="empty-msg">📭 No items match your current filter.<br>Try adjusting the status, supplier, or search.</div>';
+  // Summary stats
+  const suppliers = [...new Set(all.map(i=>i.sup))];
+  const avgStock  = all.length ? Math.round(all.reduce((s,i)=>s+i.currentStock,0)/all.length) : 0;
+  const okPct     = total ? Math.round(instock/total*100) : 0;
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat-card">
+      <div class="stat-icon navy">📦</div>
+      <div class="stat-body">
+        <div class="stat-value">${total}</div>
+        <div class="stat-label">Total Items</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green">✓</div>
+      <div class="stat-body">
+        <div class="stat-value green">${instock}</div>
+        <div class="stat-label">In Stock · ${okPct}%</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon gold">🏭</div>
+      <div class="stat-body">
+        <div class="stat-value">${suppliers.length}</div>
+        <div class="stat-label">Suppliers</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon yellow">📊</div>
+      <div class="stat-body">
+        <div class="stat-value yellow">${avgStock}</div>
+        <div class="stat-label">Avg. Stock / Item</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon slate">💰</div>
+      <div class="stat-body">
+        <div class="stat-value gold">${fmtRs(totalVal)}</div>
+        <div class="stat-label">Total Stock Value</div>
+      </div>
+    </div>
+  `;
+
+  // Cards
+  if (!list.length) {
+    grid.innerHTML = '<div class="empty-msg">📭 No items match your filter.<br>Try adjusting the status, supplier, or search terms.</div>';
     return;
   }
 
-  grid.innerHTML = visible.map(i => {
+  grid.innerHTML = list.map(i => {
     const st     = i.status;
-    const stCls  = statusClass(st);
-    const stock  = i.currentStock;
+    const stCls  = sc(st);
+    const s      = i.currentStock;
     const min    = i.minStock;
-    const pct    = stockPercent(i, stock);
-    const barCls = pct <= 20 ? 'low' : (pct <= 50 ? 'medium' : 'full');
-    const isLow  = stock > 0 && stock <= min;
-    const isOut  = stock === 0;
-    const isOver = stock > min * 3;
+    const pct    = stockPct(i, s);
+    const bc     = barClass(pct);
+    const isLow  = s > 0 && s <= min;
+    const isOut  = s === 0;
+    const isOver = s > min * 3;
+    const profit = i.sell - i.cost;
 
     return `
-      <div class="inv-card ${stCls}">
+      <div class="inv-card ${stCls}" onclick="openModal('${i.sku}')" title="Click to see details">
         <div class="card-top">
           <div class="sku-box">
             <div class="sku-icon">${i.sku.slice(3)}</div>
@@ -1040,18 +1235,15 @@ function render() {
             ${st === 'OK' ? 'OK' : st === 'Low' ? 'Low' : st === 'Out of stock' ? 'Out' : st}
           </span>
         </div>
-
         <div class="item-name">${i.name}</div>
         <div class="item-urdu">${i.urdu}</div>
-
         <div class="supplier-row">
           <span>Supplier:</span>
           <span class="supplier-tag">${i.sup}</span>
         </div>
-
         <div class="stats-row">
-          <div class="stat-box ${isLow || isOut ? 'danger' : isOver ? 'highlight' : ''}">
-            <div class="stat-num">${stock}</div>
+          <div class="stat-box ${isOut?'danger':isLow?'danger':isOver?'highlight':'safe'}">
+            <div class="stat-num">${s}</div>
             <div class="stat-lbl">In Stock</div>
           </div>
           <div class="stat-box">
@@ -1060,23 +1252,26 @@ function render() {
           </div>
           <div class="stat-box">
             <div class="stat-num">${fmtRs(i.cost)}</div>
-            <div class="stat-lbl">Cost</div>
+            <div class="stat-lbl">Cost (Rs)</div>
           </div>
-          <div class="stat-box">
+          <div class="stat-box highlight">
             <div class="stat-num">${fmtRs(i.sell)}</div>
-            <div class="stat-lbl">Sell Price</div>
+            <div class="stat-lbl">Sell (Rs)</div>
           </div>
         </div>
-
         <div class="bottom-row">
           <div class="price-info">
-            Selling: <strong class="selling">${fmtRs(i.sell)}</strong> / ${i.unit}
+            <span class="cost">Cost ${fmtRs(i.cost)}</span> ·
+            <strong class="selling">Sell ${fmtRs(i.sell)}</strong>
+            <span style="color:${profit>0?'var(--green)':'var(--red)'};font-size:11px;font-weight:700;margin-left:4px;">
+              (${profit>0?'+':'−'}Rs ${Math.abs(profit)})
+            </span>
           </div>
           <div class="stock-bar-wrap">
             <div class="stock-bar">
-              <div class="stock-bar-fill ${barCls}" style="width:${pct}%"></div>
+              <div class="stock-bar-fill ${bc}" style="width:${pct}%"></div>
             </div>
-            <span class="stock-pct ${barCls}">${pct}%</span>
+            <span class="stock-pct ${bc.includes('critical')||bc.includes('low')?'low':bc.includes('medium')?'medium':''}">${pct}%</span>
           </div>
         </div>
       </div>`;
@@ -1084,69 +1279,133 @@ function render() {
 }
 
 /* ═══════════════════════════════════════════════════════
-   FILTERS
+   MODAL
    ═══════════════════════════════════════════════════════ */
-const filterState = { status: 'all', supplier: 'all', query: '' };
+function openModal(sku){
+  const item = currentData.items.find(i=>i.sku===sku);
+  if (!item) return;
+  const s = currentData.stock[sku] ?? 0;
+  const st = getStatus(item, s);
+  const stCls = sc(st);
+  const pct = stockPct(item, s);
+  const bc  = barClass(pct);
+  const profit = item.sell - item.cost;
+  const minOrder = Math.max(0, item.minStock*2 - s);
 
-function getFilter() { return filterState; }
+  document.getElementById('modal-body').innerHTML = `
+    <div class="modal-sku">${item.sku}</div>
+    <div class="modal-name">${item.name}</div>
+    <div class="modal-urdu">${item.urdu}</div>
+    <div class="modal-status ${stCls}" style="background:${stCls==='st-ok'?'var(--green-bg)':stCls==='st-low'?'var(--yellow-bg)':stCls==='st-out'?'var(--red-bg)':'#FDF2E9'};color:${stCls==='st-ok'?'var(--green-dt)':stCls==='st-low'?'var(--yellow-dt)':stCls==='st-out'?'var(--red-dt)':'#B45F06'};">
+      <strong style="text-transform:none;letter-spacing:0;">${st === 'OK' ? '✅ In Stock' : st === 'Low' ? '⚠ Low Stock' : st === 'Out of stock' ? '🔴 Out of Stock' : '⚠ Check Entries'}</strong>
+    </div>
+    <div class="modal-stats">
+      <div class="ms-box ${s===0?'danger':s<=item.minStock?'danger':s>item.minStock*3?'highlight':''}">
+        <div class="ms-num">${s}</div>
+        <div class="ms-lbl">Current Stock</div>
+      </div>
+      <div class="ms-box">
+        <div class="ms-num">${item.minStock}</div>
+        <div class="ms-lbl">Minimum Stock</div>
+      </div>
+      <div class="ms-box">
+        <div class="ms-num">${fmtRs(item.cost)}</div>
+        <div class="ms-lbl">Cost Price (Rs)</div>
+      </div>
+      <div class="ms-box highlight">
+        <div class="ms-num">${fmtRs(item.sell)}</div>
+        <div class="ms-lbl">Selling Price (Rs)</div>
+      </div>
+    </div>
+    <div style="margin-bottom:10px;">
+      <div class="modal-section">Stock Level</div>
+      <div style="background:var(--grey-bg);border-radius:8px;height:10px;overflow:hidden;margin-bottom:6px;">
+        <div style="height:100%;width:${pct}%;background:${bc==='critical'?'var(--red)':bc==='low'?'linear-gradient(90deg,var(--yellow),var(--red))':bc==='medium'?'linear-gradient(90deg,var(--green),var(--yellow))':'var(--green)'};transition:width 0.6s;border-radius:8px;"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--slate-2);margin-bottom:14px;">
+        <span>0</span>
+        <span>${pct}% full</span>
+        <span>${(item.minStock*5)} pcs</span>
+      </div>
+    <div class="modal-section">Profit per Piece</div>
+    <div class="modal-detail">
+      Selling Rs ${item.sell} − Cost Rs ${item.cost} =
+      <strong style="color:${profit>0?'var(--green)':'var(--red)'};">
+        ${profit>0?'+':''}Rs ${profit} per piece
+      </strong>
+    </div>
+    <div class="modal-section">Supplier</div>
+    <div class="modal-detail"><strong>${item.sup}</strong> · Unit: ${item.unit}</div>
+    ${minOrder > 0 ? `
+    <div class="modal-section" style="margin-top:16px;padding-top:14px;border-top:1px solid var(--grey-bd);">
+      <strong style="color:var(--red-dt);">⚠ Reorder Suggestion</strong>
+      <div class="modal-detail" style="margin-top:4px;">
+        Order at least <strong>${minOrder} pcs</strong> to reach 2× minimum stock level.
+      </div>
+    ` : ''}
+  `;
+  document.getElementById('modal-overlay').classList.add('active');
+}
+function closeModal(){ document.getElementById('modal-overlay').classList.remove('active'); }
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal-overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+});
 
-function setupFilters() {
-  const statusSel   = document.getElementById('filter-status');
-  const supplierSel = document.getElementById('filter-supplier');
-  const searchBox   = document.getElementById('search-box');
+/* ═══════════════════════════════════════════════════════
+   FILTERS & SORT
+   ═══════════════════════════════════════════════════════ */
+function setupFilters(){
+  const ss    = document.getElementById('filter-status');
+  const supS  = document.getElementById('filter-supplier');
+  const search = document.getElementById('search-box');
+  const sortS = document.getElementById('sort-by');
 
-  // Populate suppliers
-  const suppliers = [...new Set(currentData.items.map(i => i.sup))].sort();
-  suppliers.forEach(s => {
-    const opt = document.createElement('option');
-    opt.value = s; opt.textContent = s;
-    supplierSel.appendChild(opt);
+  const suppliers = [...new Set(currentData.items.map(i=>i.sup))].sort();
+  suppliers.forEach(s=>{
+    const o=document.createElement('option'); o.value=s; o.textContent=s;
+    supS.appendChild(o);
   });
 
-  statusSel.addEventListener('change', () => {
-    filterState.status = statusSel.value; render();
-  });
-  supplierSel.addEventListener('change', () => {
-    filterState.supplier = supplierSel.value; render();
-  });
-  searchBox.addEventListener('input', () => {
-    filterState.query = searchBox.value.trim(); render();
-  });
+  ss.addEventListener('change', ()=>{ currentFilter.status=ss.value; render(); });
+  supS.addEventListener('change', ()=>{ currentFilter.supplier=supS.value; render(); });
+  search.addEventListener('input', ()=>{ currentFilter.query=search.value.trim(); render(); });
+  sortS.addEventListener('change', ()=>{ currentFilter.sort=sortS.value; render(); });
 
-  document.getElementById('btn-refresh').addEventListener('click', async () => {
-    document.getElementById('btn-refresh').textContent = '⏳ Loading…';
-    document.getElementById('btn-refresh').disabled = true;
+  document.getElementById('btn-refresh').addEventListener('click', async ()=>{
+    document.getElementById('btn-refresh').textContent='⏳ Loading…';
+    document.getElementById('btn-refresh').disabled=true;
+    document.getElementById('sync-dot').className='sync-dot pending';
     await loadData();
-    document.getElementById('btn-refresh').textContent = '🔄 Refresh';
-    document.getElementById('btn-refresh').disabled = false;
+    document.getElementById('btn-refresh').textContent='🔄 Refresh';
+    document.getElementById('btn-refresh').disabled=false;
+    document.getElementById('sync-dot').className='sync-dot';
   });
+
+  document.getElementById('btn-print').addEventListener('click', ()=> window.print());
 }
 
 /* ═══════════════════════════════════════════════════════
-   LOAD DATA
+   LOAD
    ═══════════════════════════════════════════════════════ */
-async function loadData() {
-  document.getElementById('loading').classList.add('active');
+async function loadData(){
+  document.getElementById('loading-overlay').classList.add('active');
+  document.getElementById('sync-dot').className='sync-dot pending';
 
   const data = await fetchFromGoogleSheets();
-
-  if (data) {
+  if (data){
     currentData = data;
+    dataSource  = 'google';
     document.getElementById('last-updated').textContent =
-      'Updated: ' + new Date().toLocaleTimeString('en-PK', {
-        hour: '2-digit', minute: '2-digit', second: '2-digit'
-      });
+      'Updated: '+new Date().toLocaleTimeString('en-PK',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   } else {
-    // Use fallback
-    currentData = {
-      items: FALLBACK_ITEMS.map(i => ({ ...i })),
-      stock: { ...FALLBACK_STOCK }
-    };
+    currentData = { items:FALLBACK_ITEMS.map(i=>({...i})), stock:{...FALLBACK_STOCK} };
+    dataSource  = 'fallback';
     document.getElementById('last-updated').textContent =
-      'Showing cached data (Google Sheets unavailable)';
+      'Showing cached data · Google Sheets currently unreachable';
   }
 
-  document.getElementById('loading').classList.remove('active');
+  document.getElementById('loading-overlay').classList.remove('active');
   setupFilters();
   render();
 }
@@ -1156,7 +1415,6 @@ async function loadData() {
    ═══════════════════════════════════════════════════════ */
 document.getElementById('gsheet-link').href =
   'https://docs.google.com/spreadsheets/d/1f-BisiOUufklx2av8D_3NMHqjNugPo_Xg8W4bDmXP4E/edit';
-
 loadData();
 </script>
 </body>
