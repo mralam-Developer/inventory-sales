@@ -290,9 +290,7 @@
   .pc-status.out{background:var(--red-bg);color:var(--red-dt)}
   .product-card .pc-name{font-size:13px;font-weight:700;color:var(--navy);line-height:1.3}
   .product-card .pc-urdu{font-size:11px;color:var(--slate-2);font-style:italic;direction:rtl;text-align:right}
-  .product-card .pc-footer{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
-  .product-card .pc-price{font-size:13px;font-weight:700;color:var(--green)}
-  .product-card .pc-price small{font-weight:400;color:var(--slate-2);font-size:10px}
+  .product-card .pc-footer{display:flex;align-items:center;justify-content:center;margin-top:4px;gap:0}
   .add-btn{
     width:34px;height:34px;border-radius:50%;background:var(--green);color:#fff;border:none;
     font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;
@@ -638,8 +636,6 @@
           <select id="pos-sort">
             <option value="sku">By SKU</option>
             <option value="name">By Name</option>
-            <option value="price-low">Price: Low→High</option>
-            <option value="price-high">Price: High→Low</option>
           </select>
           <button class="tb-btn gold" onclick="checkout()">🛒 Checkout</button>
         </div>
@@ -751,7 +747,6 @@
         <thead><tr>
           <th>SKU</th><th>Item Name</th><th>Urdu</th><th>Supplier</th>
           <th>Current Stock</th><th>Min. Stock</th><th>Status</th>
-          <th>Cost (Rs)</th><th>Sell (Rs)</th><th>Stock Value (Rs)</th>
         </tr></thead>
         <tbody id="inventory-body"></tbody>
       </table>
@@ -1176,8 +1171,7 @@ function renderHome(){
     return `<div class="quick-card" onclick="addToCart('${p.sku}',1)">
       <div class="sku">${p.sku}</div>
       <div class="name">${p.name}</div>
-      <div class="price">${fmtRs(p.sell)}</div>
-      <div style="font-size:10px;color:${st==='OK'?'var(--green)':st==='Low'?'var(--yellow)':'var(--red)'}">${s} pcs</div>
+      <div style="font-size:10px;color:${st==='OK'?'var(--green)':st==='Low'?'var(--yellow)':'var(--red)'}">${s} pcs — tap to add</div>
     </div>`;
   }).join('');
 }
@@ -1198,10 +1192,8 @@ function renderPosProducts(){
   if (catFilter === 'out')     list = list.filter(p=>p.status==='Out of stock');
 
   // Sort
-  if (sortBy === 'sku')           list.sort((a,b)=>a.sku.localeCompare(b.sku));
-  if (sortBy === 'name')          list.sort((a,b)=>a.name.localeCompare(b.name));
-  if (sortBy === 'price-low')     list.sort((a,b)=>a.sell-b.sell);
-  if (sortBy === 'price-high')    list.sort((a,b)=>b.sell-a.sell);
+  if (sortBy === 'sku')     list.sort((a,b)=>a.sku.localeCompare(b.sku));
+  if (sortBy === 'name')    list.sort((a,b)=>a.name.localeCompare(b.name));
 
   const grid = document.getElementById('pos-product-grid');
   if (list.length === 0){
@@ -1226,7 +1218,6 @@ function renderPosProducts(){
         <div class="pc-name">${p.name}</div>
         <div class="pc-urdu">${p.urdu}</div>
         <div class="pc-footer">
-          <span class="pc-price">${fmtRs(p.sell)} <small>/ ${p.unit}</small></span>
           <button class="add-btn ${s<=0?'sold-out':''}" ${!canAdd?'disabled':''} onclick="event.stopPropagation();addToCart('${p.sku}',1)">
             ${s<=0?'✕':cartQty>0?'−':'+'}
           </button>
@@ -1252,7 +1243,6 @@ function renderCart(){
   }
 
   container.innerHTML = cart.map(c=>{
-    const p = getProduct(c.sku);
     const available = getStock(c.sku);
     const maxQty = Math.max(0, available - (cart.filter(x=>x.sku!==c.sku).reduce((s,x)=>s+x.qty,0)));
     return `
@@ -1260,7 +1250,6 @@ function renderCart(){
         <div class="cart-item-info">
           <div class="cart-item-sku">${c.sku}</div>
           <div class="cart-item-name">${c.name}</div>
-          <div class="cart-item-price">${fmtRs(c.sell)} / ${p.unit}</div>
         </div>
         <div class="cart-item-qty">
           <button class="qty-btn" onclick="updateCartQty('${c.sku}',-1)" ${cartQty(c.sku)<=1?'disabled':''}>−</button>
@@ -1357,8 +1346,7 @@ function renderInventory(){
   let list = products.map(p=>({
     ...p,
     stock:getStock(p.sku),
-    status:getStatus(p),
-    stockValue:getStock(p.sku)*p.sell
+    status:getStatus(p)
   }));
 
   if (search){
@@ -1380,13 +1368,12 @@ function renderInventory(){
     const s = getStock(p.sku);
     const st = getStatus(p);
     const pct = stockPct(p);
-    const stColor = st==='OK'?'var(--green)':st==='Low'?'var(--yellow)':st==='Out of stock'?'var(--red)':'var(--orange)';
     return `
       <tr>
         <td style="font-family:Monaco,monospace;font-weight:700;color:var(--gold-dt)">${p.sku}</td>
         <td style="font-weight:700;color:var(--navy)">${p.name}</td>
         <td style="font-style:italic;direction:rtl;text-align:right;color:var(--slate-2)">${p.urdu}</td>
-        <td><span class="supplier-tag" style="background:var(--grey-bg);color:var(--slate);font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;display:inline-block">${p.sup}</span></td>
+        <td><span style="background:var(--grey-bg);color:var(--slate);font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;display:inline-block">${p.sup}</span></td>
         <td>
           <div style="display:flex;align-items:center;gap:6px">
             <span style="font-weight:800;color:${st==='OK'?'var(--green)':st==='Low'?'var(--yellow)':st==='Out of stock'?'var(--red)':'var(--orange)'};font-size:15px">${s}</span>
@@ -1396,9 +1383,6 @@ function renderInventory(){
         </td>
         <td style="font-weight:700;color:var(--slate)">${p.minStock}</td>
         <td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:8px;text-transform:uppercase;background:${st==='OK'?'var(--green-bg)':st==='Low'?'var(--yellow-bg)':st==='Out of stock'?'var(--red-bg)':'#FDF2E9'};color:${st==='OK'?'var(--green-dt)':st==='Low'?'var(--yellow-dt)':st==='Out of stock'?'var(--red-dt)':'#B45F06'}">${st}</span></td>
-        <td style="font-weight:700;color:var(--slate-2)">${fmtRs(p.cost)}</td>
-        <td style="font-weight:800;color:var(--green)">${fmtRs(p.sell)}</td>
-        <td style="font-weight:800;color:var(--navy)">${fmtRs(p.stockValue)}</td>
       </tr>`;
   }).join('');
 }
