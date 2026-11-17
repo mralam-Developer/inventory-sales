@@ -827,7 +827,15 @@
 /* ═══════════════════════════════════════════════════════
    DATA LOADING
    ═══════════════════════════════════════════════════════ */
-const DATA_FILE_URL = window.location.origin + '/data.json';
+// ═══════════════════════════════════════════════════════
+//  LIVE STOCK API — fill APPS_SCRIPT_URL to enable live
+//  data from Google Sheets. Leave null to fall back to
+//  the static data.json bundled with the POS.
+//  Get your URL by deploying AppsScript_StockAPI.gs as a
+//  Web App (see instructions in scripts/ folder).
+// ═══════════════════════════════════════════════════════
+const APPS_SCRIPT_URL = null; // e.g. "https://script.google.com/macros/s/AKfycbx.../exec"
+const DATA_FILE_URL = APPS_SCRIPT_URL || window.location.origin + '/data.json';
 let products = [];
 let stockData = {};
 
